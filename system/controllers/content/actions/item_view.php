@@ -70,7 +70,7 @@ class actionContentItemView extends cmsAction {
                 cmsUser::addSessionMessage(sprintf(
                     LANG_CONTENT_PRIVATE_FRIEND_INFO,
                     (!empty($ctype['labels']['one']) ? $ctype['labels']['one'] : LANG_PAGE),
-                    href_to('users', $item['user_id']),
+                    href_to('users', $item['user_slug']),
                     htmlspecialchars($item['user']['nickname'])
                 ), 'info');
                 $this->redirect(href_to($ctype['name']));

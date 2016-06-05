@@ -34,7 +34,7 @@
                 'title' => LANG_USERS_MY_INVITES,
                 'class' => 'invites',
                 'counter' => $profile['invites_count'],
-                'href' => $this->href_to($profile['id'], 'invites')
+                'href' => $this->href_to($profile['slug'], 'invites')
             );
         }
 
@@ -42,7 +42,7 @@
             $tool_buttons['settings'] = array(
                 'title' => LANG_USERS_EDIT_PROFILE,
                 'class' => 'settings',
-                'href' => $this->href_to($profile['id'], 'edit')
+                'href' => $this->href_to($profile['slug'], 'edit')
             );
         }
 
@@ -50,7 +50,7 @@
             $tool_buttons['edit'] = array(
                 'title' => LANG_USERS_EDIT_USER,
                 'class' => 'edit',
-                'href' => href_to('admin', 'users', array('edit', $profile['id'])) . "?back=" . $this->href_to($profile['id'])
+                'href' => href_to('admin', 'users', array('edit', $profile['id'])) . "?back=" . $this->href_to($profile['slug'])
             );
         }
 
@@ -102,12 +102,12 @@
         <?php if ($is_friends_on && $friends) { ?>
             <div class="block">
                 <div class="block-title">
-                    <a href="<?php echo $this->href_to($profile['id'], 'friends'); ?>"><?php echo LANG_USERS_FRIENDS; ?></a>
+                    <a href="<?php echo $this->href_to($profile['slug'], 'friends'); ?>"><?php echo LANG_USERS_FRIENDS; ?></a>
                     (<?php echo $profile['friends_count']; ?>)
                 </div>
                 <div class="friends-list">
                     <?php foreach($friends as $friend){ ?>
-                        <a href="<?php echo $this->href_to($friend['id']); ?>" title="<?php html($friend['nickname']); ?>">
+                        <a href="<?php echo $this->href_to($friend['slug']); ?>" title="<?php html($friend['nickname']); ?>">
                             <span><?php echo html_avatar_image($friend['avatar'], 'micro', $friend['nickname']); ?></span>
                         </a>
                     <?php } ?>

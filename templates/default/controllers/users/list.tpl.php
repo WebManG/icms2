@@ -34,11 +34,11 @@
                 <?php } ?>
 
                 <div class="icon">
-					<a href="<?php echo $this->href_to($profile['id']); ?>"><?php echo html_avatar_image($profile['avatar'], 'micro', $profile['nickname']); ?></a>
+					<a href="<?php echo $this->href_to($profile['slug']); ?>"><?php echo html_avatar_image($profile['avatar'], 'micro', $profile['nickname']); ?></a>
                 </div>
 
                 <div class="title">
-                    <a href="<?php echo $this->href_to($profile['id']); ?>"><?php html($profile['nickname']); ?></a>
+                    <a href="<?php echo $this->href_to($profile['slug']); ?>"><?php html($profile['nickname']); ?></a>
                 </div>
 
                 <div class="actions">

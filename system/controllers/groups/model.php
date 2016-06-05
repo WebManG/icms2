@@ -182,6 +182,7 @@ class modelGroups extends cmsModel{
     public function getGroup($id){
 
         $this->select('u.nickname', 'owner_nickname');
+        $this->select('u.slug', 'owner_slug');
 
         $this->join('{users}', 'u', 'u.id = i.owner_id');
 
@@ -311,6 +312,7 @@ class modelGroups extends cmsModel{
 
         $this->select('u.id', 'id');
         $this->select('u.nickname', 'nickname');
+        $this->select('u.slug', 'slug');
         $this->select('u.avatar', 'avatar');
 
         $this->join('{users}', 'u', 'u.id = i.user_id');

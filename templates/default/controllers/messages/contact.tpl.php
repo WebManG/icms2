@@ -4,7 +4,7 @@
 <div id="pm_contact">
 
     <div class="overview">
-        <a href="<?php echo href_to('users', $contact['id']); ?>">
+        <a href="<?php echo href_to('users', $contact['slug']); ?>">
             <span><?php echo html_avatar_image($contact['avatar'], 'micro'); ?></span>
             <span><?php echo $contact['nickname']; ?></span>
         </a>

@@ -47,9 +47,9 @@ class actionUsersProfileContent extends cmsAction {
         cmsEventsManager::hook('content_before_profile', array($ctype, $profile));
 
         if ($folder_id){
-            $page_url = href_to('users', $profile['id'], array('content', $ctype_name, $folder_id));
+            $page_url = href_to('users', $profile['slug'], array('content', $ctype_name, $folder_id));
         } else {
-            $page_url = href_to('users', $profile['id'], array('content', $ctype_name));
+            $page_url = href_to('users', $profile['slug'], array('content', $ctype_name));
         }
 
         $list_html = $content_controller->renderItemsList($ctype, $page_url, false, 0, array('user_id' => $profile['id']));

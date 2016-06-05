@@ -213,7 +213,7 @@ class groups extends cmsFrontend{
             //
             // Личное сообщение
             //
-            $sender_link = '<a href="'.href_to('users', $user->id).'">'.$user->nickname.'</a>';
+            $sender_link = '<a href="'.href_to('users', $user->slug).'">'.$user->nickname.'</a>';
             $group_link = '<a href="'.href_to('groups', $group['id']).'">'.$group['title'].'</a>';
 
             $notice = array(
@@ -242,7 +242,7 @@ class groups extends cmsFrontend{
             //
             $messenger->sendNoticeEmail('groups_invite', array(
                 'user_nickname' => $user->nickname,
-                'user_url' => href_to_abs('users', $user->id),
+                'user_url' => href_to_abs('users', $user->slug),
                 'group_title' => $group['title'],
                 'group_url' => href_to_abs('groups', $group['id']),
             ));

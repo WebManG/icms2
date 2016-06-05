@@ -59,7 +59,7 @@ class actionUsersProfileEditPrivacy extends cmsAction {
                 // Обновляем профиль и редиректим на его просмотр
                 $this->model->updateUserPrivacyOptions($profile['id'], $options);
 
-                $this->redirectTo('users', $profile['id']);
+                $this->redirectTo('users', $profile['slug']);
 
             }
 

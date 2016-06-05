@@ -9,7 +9,7 @@ class onCommentsUserTabShow extends cmsAction {
 
         $this->model->filterEqual('user_id', $profile['id']);
 
-        $page_url = href_to('users', $profile['id'], 'comments');
+        $page_url = href_to('users', $profile['slug'], 'comments');
 
         $list_html = $this->renderCommentsList($page_url);
 

@@ -27,9 +27,9 @@ class actionUsersFieldsEdit extends cmsAction {
             $form->removeFieldset('privacy');
             $form->removeFieldset('values');
         }
-        
+
         // удалим выбор типа для полей с фиксированным типом
-        if ($field['is_fixed_type']) { $form->removeFieldset('type'); }        
+        if ($field['is_fixed_type']) { $form->hideField('type', 'type'); }
 
         if ($is_submitted){
 

@@ -42,7 +42,7 @@
     <div class="info">
         <div class="name">
 			<?php if ($entry['user_id']) { ?>
-				<a class="user" href="<?php echo href_to('users', $entry['user']['id']); ?>"><?php echo $entry['user']['nickname']; ?></a>
+				<a class="user" href="<?php echo href_to('users', $entry['user']['slug']); ?>"><?php echo $entry['user']['nickname']; ?></a>
 			<?php } else { ?>
 				<span class="guest_name">
 					<?php echo $entry['author_name']; ?>
@@ -82,7 +82,7 @@
     </div>
     <div class="body">
         <div <?php if (!empty($entry['user']['is_online'])){ ?>class="avatar comment_user_online" title="<?php echo LANG_ONLINE; ?>"<?php } else { ?> class="avatar"<?php } ?>>
-            <a href="<?php echo href_to('users', $entry['user']['id']); ?>">
+            <a href="<?php echo href_to('users', $entry['user']['slug']); ?>">
                 <?php echo html_avatar_image($entry['user']['avatar'], 'micro', $entry['user']['nickname']); ?>
             </a>
         </div>

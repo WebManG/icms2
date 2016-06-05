@@ -830,7 +830,6 @@ ul.errors li .hint strong { color:#666666; }
     height: 30px;
     line-height: 30px;
     padding:0 10px;
-    padding-left:25px;
     border-bottom: solid 1px #B3C2C9;
     text-align: left;
     background: #B3C2C9;
@@ -848,18 +847,19 @@ ul.errors li .hint strong { color:#666666; }
 }
 
 .datagrid th.sort_asc {
+    padding-left:25px;
     cursor: pointer;
     background:url("../../images/icons/sort_asc.png") no-repeat 5px center #B3C2C9;
 }
 
 .datagrid th.sort_desc {
+    padding-left:25px;
     cursor: pointer;
     background:url("../../images/icons/sort_desc.png") no-repeat 5px center #B3C2C9;
 }
 
 .datagrid td {
     padding:5px 10px;
-    padding-left:25px;
     background: #fff;
     color:#34495e;
     height:20px;

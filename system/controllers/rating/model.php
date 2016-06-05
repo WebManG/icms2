@@ -50,9 +50,10 @@ class modelRating extends cmsModel{
         return $this->get('rating_log', function($item, $model){
 
             $item['user'] = array(
-                'id' => $item['user_id'],
+                'id'       => $item['user_id'],
                 'nickname' => $item['user_nickname'],
-                'avatar' => $item['user_avatar']
+                'slug'     => $item['user_slug'],
+                'avatar'   => $item['user_avatar']
             );
 
             return $item;

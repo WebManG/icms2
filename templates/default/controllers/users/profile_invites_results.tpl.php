@@ -3,7 +3,7 @@
     $this->setPageTitle(LANG_USERS_MY_INVITES);
 
     $this->addBreadcrumb(LANG_USERS, href_to('users'));
-    $this->addBreadcrumb($profile['nickname'], href_to('users', $id));
+    $this->addBreadcrumb($profile['nickname'], href_to('users', $profile['slug']));
     $this->addBreadcrumb(LANG_USERS_MY_INVITES);
 
 ?>
@@ -33,5 +33,5 @@
 <?php } ?>
 
 <p>
-    <a href="<?php href_to('users', $id); ?>"><?php echo LANG_CONTINUE; ?></a>
+    <a href="<?php href_to('users', $profile['slug']); ?>"><?php echo LANG_CONTINUE; ?></a>
 </p>

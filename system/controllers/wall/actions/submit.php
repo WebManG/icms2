@@ -151,13 +151,15 @@ class actionWallSubmit extends cmsAction {
 
         if ($entry['user_id'] == $profile_id) { return; }
 
+        $profile_slug = cmsCore::getController('users')->model->getUserSlug($profile_id);
+
         $messenger = cmsCore::getController('messages');
 
         $messenger->addRecipient($profile_id);
 
         $messenger->sendNoticeEmail('wall_reply', array(
-            'profile_url' => href_to_abs('users', $profile_id) . "?wid={$entry['id']}&reply=1",
-            'author_url' => href_to_abs('users', $entry['user_id']),
+            'profile_url' => href_to_abs('users', $profile_slug) . "?wid={$entry['id']}&reply=1",
+            'author_url' => href_to_abs('users', $entry['user_slug']),
             'author_nickname' => $entry['user_nickname'],
             'content' => $entry['content_html'],
         ));

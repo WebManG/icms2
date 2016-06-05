@@ -14,7 +14,7 @@ class fieldHtml extends cmsFormField {
         return array(
             new fieldList('editor', array(
                 'title' => LANG_PARSER_HTML_EDITOR,
-                'default' => cmsConfig::get('default_editor'),
+                'default' => 'redactor',
                 'generator' => function($item){
                     $items = array();
                     $editors = cmsCore::getWysiwygs();

@@ -13,6 +13,11 @@ class formAuthOptions extends cmsForm {
             'profileedit' => LANG_REG_CFG_AUTH_REDIRECT_PROFILEEDIT
         );
 
+        // Получаем список пользовательских полей
+        $users_fields = cmsCore::getModel('content')->
+            setTablePrefix('')->
+            getContentFields('{users}');
+
         return array(
 
             array(
@@ -41,6 +46,33 @@ class formAuthOptions extends cmsForm {
                         'hint' => LANG_REG_CFG_VERIFY_EMAIL_HINT,
                     )),
 
+                    new fieldList('reg_user_slug', array(
+                        'title'   => LANG_REG_CFG_REG_USER_SLUG,
+                        'default' => '',
+                        'generator'   => function() use($users_fields){
+
+                            $items = array(
+                                'id'    => 'id',
+                                'slug'  => LANG_REG_CFG_REG_USER_SLUG_SLUG
+                            );
+
+                            // Добавляем в список уникальные и обязательные поля
+                            foreach($users_fields as $field) {
+                                if ($field['options']['is_unique'] && $field['options']['is_required']) {
+                                    $items[$field['name']] = $field['title'].' ('.$field['name'].')';
+                                }
+                            }
+
+                            return $items;
+
+                        }
+                    )),
+
+                    new fieldString('rules_url', array(
+                        'title' => LANG_REG_CFG_RULES_URL,
+                        'hint' => LANG_REG_CFG_RULES_URL_HINT,
+                    )),
+
                     new fieldCheckbox('reg_auto_auth', array(
                         'title'   => LANG_REG_CFG_REG_AUTO_AUTH,
                         'default' => 1
@@ -64,6 +96,27 @@ class formAuthOptions extends cmsForm {
                 'type' => 'fieldset',
                 'title' => LANG_AUTHORIZATION,
                 'childs' => array(
+
+                    new fieldList('auth_by', array(
+                        'title'   => LANG_AUTH_BY,
+                        'default' => '',
+                        'generator'   => function() use($users_fields){
+
+                            $items = array(
+                                'email'  => LANG_EMAIL
+                            );
+
+                            // Добавляем в список уникальные поля
+                            foreach($users_fields as $field) {
+                                if ($field['options']['is_unique']) {
+                                    $items[$field['name']] = $field['title'].' ('.$field['name'].')';
+                                }
+                            }
+
+                            return $items;
+
+                        }
+                    )),
 
                     new fieldCheckbox('auth_captcha', array(
                         'title' => LANG_REG_CFG_AUTH_CAPTCHA,
@@ -92,6 +145,11 @@ class formAuthOptions extends cmsForm {
                     new fieldText('restricted_emails', array(
                         'title' => LANG_AUTH_RESTRICTED_EMAILS,
                         'hint' => LANG_AUTH_RESTRICTED_EMAILS_HINT,
+                    )),
+
+                    new fieldText('restricted_slugs', array(
+                        'title' => LANG_AUTH_RESTRICTED_SLUGS,
+                        'hint' => LANG_AUTH_RESTRICTED_SLUGS_HINT,
                     )),
 
                     new fieldText('restricted_names', array(

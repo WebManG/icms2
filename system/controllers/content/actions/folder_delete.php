@@ -21,7 +21,7 @@ class actionContentFolderDelete extends cmsAction {
 
         $this->model->deleteContentFolder($folder);
 
-        $this->redirect( href_to('users', $folder['user_id'], array('content', $ctype['name'])) );
+        $this->redirect( href_to('users', $folder['user_slug'], array('content', $ctype['name'])) );
 
     }
 

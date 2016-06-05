@@ -11,11 +11,11 @@ class onUsersSitemapUrls extends cmsAction {
         $users = $this->model->
                             filterIsNull('is_locked')->
                             limit(false)->
-                            getUsersIds();
+                            getUsersSlugs();
 
         if ($users){
             foreach($users as $user){
-                $url = href_to_abs($this->name, $user['id']);
+                $url = href_to_abs($this->name, $user['slug']);
                 $date_last_modified = false;
                 $urls[$url] = $date_last_modified;
             }

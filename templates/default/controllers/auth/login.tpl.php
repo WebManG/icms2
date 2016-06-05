@@ -34,8 +34,8 @@
 
                     <h3><?php echo LANG_LOG_IN_ACCOUNT; ?></h3>
 
-                    <div class="label"><label><?php echo LANG_EMAIL; ?>:</label></div>
-                    <div class="field"><?php echo html_input('text', 'login_email', '', array('id'=>'login_email', 'required'=>true, 'autofocus'=>true)); ?></div>
+                    <div class="label"><label><?php echo $this->controller->getAuthByTitle(); ?>:</label></div>
+                    <div class="field"><?php echo html_input('text', 'login_login', '', array('id'=>'login_login', 'required'=>true, 'autofocus'=>true)); ?></div>
 
                     <div class="label"><label><?php echo LANG_PASSWORD; ?>:</label></div>
                     <div><?php echo html_input('password', 'login_password', '', array('required'=>true)); ?></div>

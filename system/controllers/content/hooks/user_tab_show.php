@@ -12,14 +12,14 @@ class onContentUserTabShow extends cmsAction {
 
         $this->model->filterEqual('user_id', $profile['id']);
 
-        $page_url = href_to('users', $profile['id'], $ctype_name);
+        $page_url = href_to('users', $profile['slug'], $ctype_name);
 
         if ($user->id != $profile['id'] && !$user->is_admin){
             $this->model->filterHiddenParents();
         }
 
         if ($user->id == $profile['id'] || $user->is_admin){
-            $this->model->disableApprovedFilter();            
+            $this->model->disableApprovedFilter();
         }
 
         cmsEventsManager::hook("content_before_profile", array($ctype, $profile));

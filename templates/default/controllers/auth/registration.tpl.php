@@ -17,7 +17,8 @@
         'method' => 'post',
         'append_html' => $captcha_html,
         'submit' => array(
-            'title' => LANG_CONTINUE
+            'title' => LANG_CONTINUE,
+            'id' => 'submit_register'
         )
     ), $errors);
 ?>
@@ -48,6 +49,26 @@
 
     }
 
+    function userurlUpdate(){
+
+        $("#userurl").text($("#<?php echo $this->controller->options['reg_user_slug']; ?>").val());
+
+    }
+
+    function rulesagreeUpdate(){
+
+        if ($("#rules_agree").length) {
+
+            if ($("#rules_agree").prop('checked')) {
+                $("#submit_register").show();
+            } else {
+                $("#submit_register").hide();
+            }
+
+        }
+
+    }
+
     $(document).ready(function(){
 
         if ($('select#group_id').length == 0){ return false; }
@@ -56,6 +77,22 @@
 
     });
 
+    $("#<?php echo $this->controller->options['reg_user_slug']; ?>").keyup(function(){
+
+        userurlUpdate();
+
+    });
+
+   $("#rules_agree").change(function(){
+
+        rulesagreeUpdate();
+
+    });
+
     toggleGroups();
+
+    userurlUpdate();
+    rulesagreeUpdate();
+
 
 </script>

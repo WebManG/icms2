@@ -37,7 +37,7 @@ class actionContentFolderEdit extends cmsAction {
                 // Обновляем папку и редиректим на ее просмотр
                 $this->model->updateContentFolder($id, $updated_folder);
 
-                $this->redirect( href_to('users', $folder['user_id'], array('content', $ctype['name'], $folder['id'])) );
+                $this->redirect( href_to('users', $folder['user_slug'], array('content', $ctype['name'], $folder['id'])) );
 
             }
 

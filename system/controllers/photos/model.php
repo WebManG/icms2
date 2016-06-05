@@ -36,6 +36,7 @@ class modelPhotos extends cmsModel{
         $this->useCache("photos.{$album_id}");
 
         $this->select('u.nickname', 'user_nickname');
+        $this->select('u.slug', 'user_slug');
         $this->select('u.avatar', 'user_avatar');
         $this->join('{users}', 'u', 'u.id = i.user_id');
 
@@ -44,9 +45,10 @@ class modelPhotos extends cmsModel{
         return $this->get('photos', function($item, $model){
 
             $item['user'] = array(
-                'id' => $item['user_id'],
+                'id'       => $item['user_id'],
                 'nickname' => $item['user_nickname'],
-                'avatar' => $item['user_avatar']
+                'slug'     => $item['user_slug'],
+                'avatar'   => $item['user_avatar']
             );
 
             $item['image'] = cmsModel::yamlToArray($item['image']);
@@ -73,6 +75,7 @@ class modelPhotos extends cmsModel{
         $user = cmsUser::getInstance();
 
         $this->select('u.nickname', 'user_nickname');
+        $this->select('u.slug', 'user_slug');
         $this->select('u.avatar', 'user_avatar');
         $this->join('{users}', 'u', 'u.id = i.user_id');
 
@@ -82,9 +85,10 @@ class modelPhotos extends cmsModel{
         return $this->get('photos', function($item, $model){
 
             $item['user'] = array(
-                'id' => $item['user_id'],
+                'id'       => $item['user_id'],
                 'nickname' => $item['user_nickname'],
-                'avatar' => $item['user_avatar']
+                'slug'     => $item['user_slug'],
+                'avatar'   => $item['user_avatar']
             );
 
             $item['image'] = cmsModel::yamlToArray($item['image']);
@@ -98,15 +102,17 @@ class modelPhotos extends cmsModel{
     public function getPhoto($id){
 
         $this->select('u.nickname', 'user_nickname');
+        $this->select('u.slug', 'user_slug');
         $this->select('u.avatar', 'user_avatar');
         $this->join('{users}', 'u', 'u.id = i.user_id');
 
         return $this->getItemById('photos', $id, function($item, $model){
 
             $item['user'] = array(
-                'id' => $item['user_id'],
+                'id'       => $item['user_id'],
                 'nickname' => $item['user_nickname'],
-                'avatar' => $item['user_avatar']
+                'slug'     => $item['user_slug'],
+                'avatar'   => $item['user_avatar']
             );
 
             $item['image'] = cmsModel::yamlToArray($item['image']);

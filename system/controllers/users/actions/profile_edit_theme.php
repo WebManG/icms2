@@ -31,7 +31,7 @@ class actionUsersProfileEditTheme extends cmsAction {
                 // Обновляем профиль и редиректим на его просмотр
                 $this->model->updateUserTheme($profile['id'], $theme);
 
-                $this->redirectTo('users', $profile['id']);
+                $this->redirectTo('users', $profile['slug']);
 
             }
 

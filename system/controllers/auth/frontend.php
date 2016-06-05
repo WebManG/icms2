@@ -49,6 +49,14 @@ class auth extends cmsFrontend {
 
     }
 
+    public function isSlugAllowed($value){
+
+        $list = $this->options['restricted_slugs'];
+
+        return !string_in_mask_list($value, $list);
+
+    }
+
     public function isNameAllowed($value){
 
         $list = $this->options['restricted_names'];
@@ -72,8 +80,8 @@ class auth extends cmsFrontend {
 
         $url = href_to_home();
 
-		$user_id = cmsUser::sessionGet('user:id');
-		if (!$user_id){ return $url; }
+		$user_slug = cmsUser::sessionGet('user:slug');
+		if (!$user_slug){ return $url; }
 
         $back_url = $this->getBackURL();
         if(strpos($back_url, href_to('auth', 'login')) !== false) {
@@ -82,11 +90,38 @@ class auth extends cmsFrontend {
 		switch($value){
 			case 'none':        $url = $back_url; break;
 			case 'index':       $url = href_to_home(); break;
-			case 'profile':     $url = href_to('users', $user_id); break;
-			case 'profileedit': $url = href_to('users', $user_id, 'edit'); break;
+			case 'profile':     $url = href_to('users', $user_slug); break;
+			case 'profileedit': $url = href_to('users', $user_slug, 'edit'); break;
 		}
 
 		return $url;
+
+    }
+
+//============================================================================//
+//============================================================================//
+
+    /**
+     * Возвращает "человеческий" заголовок поля, по которому производится авторизация
+     * @return string
+     */
+    public function getAuthByTitle() {
+
+        $auth_by = $this->options['auth_by'];
+
+        switch ($auth_by) {
+
+            case 'email':
+                return LANG_EMAIL;
+
+            default:
+                $content_model = cmsCore::getModel('content');
+                $content_model->setTablePrefix('');
+                $content_model->filterEqual('name', $auth_by);
+                $fields = $content_model->getContentFields('{users}');
+                return $fields[$auth_by]['title'];
+
+        }
 
     }
 

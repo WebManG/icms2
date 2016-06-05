@@ -357,7 +357,7 @@ class content extends cmsFrontend {
         $messenger->sendEmail($to, $letter, array(
             'moderator' => $moderator['nickname'],
             'author' => $author['nickname'],
-            'author_url' => href_to_abs('users', $author['id']),
+            'author_url' => href_to_abs('users', $author['slug']),
             'page_title' => $item['title'],
             'page_url' => href_to_abs($ctype_name, $item['slug'] . ".html"),
             'date' => html_date_time(),

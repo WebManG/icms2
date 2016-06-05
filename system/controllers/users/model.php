@@ -53,6 +53,24 @@ class modelUsers extends cmsModel{
 
     }
 
+    public function getUsersSlugs(){
+
+        $this->selectOnly('i.slug', 'slug');
+
+        return $this->get('{users}');
+
+    }
+
+    public function getUserSlug($id=false){
+
+        if (!$id) return false;
+
+        $result = $this->getField('{users}', $id, 'slug');
+
+        return $result;
+
+    }
+
 //============================================================================//
 //============================================================================//
 
@@ -84,6 +102,12 @@ class modelUsers extends cmsModel{
     public function getUserByEmail($email){
 
         return $this->filterEqual('email', $email)->getUser();
+
+    }
+
+    public function getUserBySlug($slug){
+
+        return $this->filterEqual('slug', $slug)->getUser();
 
     }
 
@@ -144,9 +168,23 @@ class modelUsers extends cmsModel{
 			'time_zone' => cmsConfig::get('time_zone')
         ));
 
+        // Получаем имя поля, из которого берётся slug
+        $reg_user_slug = cmsCore::getController('Auth')->options['reg_user_slug'];
+
+        // Если поле slug не заполнено, подставляем в него содержимое
+        // нужного поля (кроме id - он ещё не известен)
+        if (!isset($user['slug']) && $reg_user_slug != 'id') {
+            if (isset($user[$reg_user_slug])) { $user['slug'] = $user[$reg_user_slug]; }
+        }
+
         $id = $this->insert('{users}', $user);
 
         if ($id){
+
+            // Если slug до сих пор пустой, то подставляем в него уже известный id пользователя
+            if (!isset($user['slug']) || $user['slug'] == '') {
+                $this->update('{users}', $id, array('slug' => $id));
+            }
 
             $this->saveUserGroupsMembership($id, $groups);
 
@@ -628,7 +666,7 @@ class modelUsers extends cmsModel{
             cmsCore::getController('activity')->addEntry('users', "friendship", array(
                 'subject_title' => $friend['nickname'],
                 'subject_id' => $friend_id,
-                'subject_url' => href_to('users', $friend_id),
+                'subject_url' => href_to('users', $friend['slug']),
             ));
 
         }
@@ -818,9 +856,10 @@ class modelUsers extends cmsModel{
         return $this->get('{users}_karma', function($item, $model){
 
             $item['user'] = array(
-                'id' => $item['user_id'],
+                'id'       => $item['user_id'],
                 'nickname' => $item['user_nickname'],
-                'avatar' => $item['user_avatar']
+                'slug'     => $item['user_slug'],
+                'avatar'   => $item['user_avatar']
             );
 
             return $item;

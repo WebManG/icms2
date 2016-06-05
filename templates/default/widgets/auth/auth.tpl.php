@@ -2,9 +2,9 @@
     <form action="<?php echo href_to('auth', 'login'); ?>" method="POST">
 
         <div class="field">
-            <label><?php echo LANG_EMAIL; ?>:</label>
+            <label><?php echo cmsCore::getController('auth')->getAuthByTitle(); ?>:</label>
             <a href="<?php echo href_to('auth', 'register'); ?>"><?php echo LANG_REGISTRATION; ?></a>
-            <?php echo html_input('text', 'login_email', '', array('required'=>true)); ?>
+            <?php echo html_input('text', 'login_login', '', array('required'=>true)); ?>
         </div>
 
         <div class="field">

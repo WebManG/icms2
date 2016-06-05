@@ -104,7 +104,7 @@
             <?php echo html_date_time($photo['date_pub']); ?>
         </div>
         <div class="bar_item bi_user" title="<?php echo LANG_AUTHOR ?>">
-            <a href="<?php echo href_to('users', $photo['user']['id']) ?>"><?php echo $photo['user']['nickname']; ?></a>
+            <a href="<?php echo href_to('users', $photo['user']['slug']) ?>"><?php echo $photo['user']['nickname']; ?></a>
         </div>
         <div class="bar_item bi_share">
             <div class="share">

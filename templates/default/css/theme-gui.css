@@ -1785,3 +1785,9 @@ form .ft_listmultiple.field_error .input_checkbox_list {
     background: #FFF;
     opacity: 0.2;
 }
+
+/* Registration form ================================================= */
+
+.hint .userurl {
+	color:blue;
+}

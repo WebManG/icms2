@@ -28,7 +28,7 @@
                 <?php } ?>
             <?php } ?>
 
-            <?php $url = href_to('users', $item['user']['id']); ?>
+            <?php $url = href_to('users', $item['user']['slug']); ?>
 
             <div class="item">
                 <?php if ($is_can_delete) { ?>

@@ -72,6 +72,7 @@ class modelMessages extends cmsModel {
 
         $this->select('u.id', 'id');
         $this->select('u.nickname', 'nickname');
+        $this->select('u.slug', 'slug');
         $this->select('u.avatar', 'avatar');
         $this->select('u.is_admin', 'is_admin');
         $this->select('u.privacy_options', 'privacy_options');
@@ -182,13 +183,15 @@ class modelMessages extends cmsModel {
     public function getMessage($id){
 
         $this->select('u.nickname', 'user_nickname');
+        $this->select('u.slug', 'user_slug');
         $this->join('{users}', 'u', 'u.id = i.from_id');
 
         return $this->getItemById('{users}_messages', $id, function($item, $model){
 
             $item['user'] = array(
-                'id' => $item['from_id'],
+                'id'       => $item['from_id'],
                 'nickname' => $item['user_nickname'],
+                'slug'     => $item['user_slug'],
             );
 
             return $item;
@@ -200,6 +203,7 @@ class modelMessages extends cmsModel {
     public function getMessages($user_id, $contact_id){
 
         $this->select('u.nickname', 'user_nickname');
+        $this->select('u.slug', 'user_slug');
         $this->select('u.avatar', 'user_avatar');
         $this->join('{users}', 'u', 'u.id = i.from_id');
 
@@ -226,6 +230,7 @@ class modelMessages extends cmsModel {
             $item['user'] = array(
                 'id'       => $item['from_id'],
                 'nickname' => $item['user_nickname'],
+                'slug'     => $item['user_slug'],
                 'avatar'   => $item['user_avatar']
             );
 
@@ -240,6 +245,7 @@ class modelMessages extends cmsModel {
     public function getMessagesFromContact($user_id, $contact_id){
 
         $this->select('u.nickname', 'user_nickname');
+        $this->select('u.slug', 'user_slug');
         $this->select('u.avatar', 'user_avatar');
         $this->join('{users}', 'u', 'u.id = i.from_id');
 
@@ -257,6 +263,7 @@ class modelMessages extends cmsModel {
             $item['user'] = array(
                 'id'       => $item['from_id'],
                 'nickname' => $item['user_nickname'],
+                'slug'     => $item['user_slug'],
                 'avatar'   => $item['user_avatar']
             );
 

@@ -29,7 +29,7 @@
                     <?php if ($is_show_details) { ?>
                         <div class="details">
                             <span class="author">
-                                <a href="<?php echo href_to('users', $item['user']['id']); ?>"><?php html($item['user']['nickname']); ?></a>
+                                <a href="<?php echo href_to('users', $item['user']['slug']); ?>"><?php html($item['user']['nickname']); ?></a>
                                 <?php if ($item['parent_id']){ ?>
                                     <?php echo LANG_WROTE_IN_GROUP; ?>
                                     <a href="<?php echo href_to($item['parent_url']); ?>"><?php html($item['parent_title']); ?></a>
