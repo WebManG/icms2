@@ -89,7 +89,7 @@
                     <?php foreach($content_counts as $ctype_name=>$count){ ?>
                         <?php if (!$count['is_in_list']) { continue; } ?>
                         <li>
-                            <a href="<?php echo href_to('users', $profile['id'], array('content', $ctype_name)); ?>">
+                            <a href="<?php echo href_to('users', $profile['slug'], array('content', $ctype_name)); ?>">
                                 <?php html($count['title']); ?>
                                 <span class="counter"><?php html($count['count']); ?></span>
                             </a>
