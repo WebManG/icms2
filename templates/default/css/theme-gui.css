@@ -2071,3 +2071,9 @@ table.data_list .actions{
         width: 370px;
     }
 }
+
+/* Registration form ================================================= */
+
+.hint .userurl {
+	color:blue;
+}

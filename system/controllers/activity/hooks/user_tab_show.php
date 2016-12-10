@@ -13,7 +13,7 @@ class onActivityUserTabShow extends cmsAction {
             $this->model->filterEqual('user_id', $profile['id']);
         }
 
-        $page_url = href_to('users', $profile['id'], 'activity');
+        $page_url = href_to('users', $profile['slug'], 'activity');
 
         if ($user->id != $profile['id'] && !$user->is_admin){
             $this->model->filterHiddenParents();

@@ -3,13 +3,13 @@
     $this->setPageTitle(LANG_USERS_MY_INVITES);
 
     $this->addBreadcrumb(LANG_USERS, href_to('users'));
-    $this->addBreadcrumb($profile['nickname'], href_to('users', $id));
+    $this->addBreadcrumb($profile['nickname'], href_to('users', $profile['slug']));
     $this->addBreadcrumb(LANG_USERS_MY_INVITES);
 
     $this->addToolButton(array(
         'class' => 'cancel',
         'title' => LANG_CANCEL,
-        'href'  => href_to('users', $id)
+        'href'  => href_to('users', $profile['slug'])
     ));
 
 

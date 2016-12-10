@@ -10,16 +10,37 @@ class users extends cmsFrontend {
 
     public function routeAction($action_name){
 
-        if (!is_numeric($action_name)){ return $action_name; }
+        if (is_numeric($action_name)) {
 
-        // разблокируем вызов экшенов, которым запрещено вызываться напрямую
+            // Если цифровой - значит id, ищем профиль пользователя по id
+            $profile = $this->model->getUser($action_name);
+
+            if ($profile) {
+                // Если профиль по id найден и slug не равен id, то перенаправляем на адрес через slug
+                if ($profile['slug'] != $action_name) {
+                    //$this->redirect(href_to($this->name, $profile['slug'], $this->current_params), 301);
+                    // Временно для отладки
+                    cmsCore::error404();
+                }
+            } else {
+                // Если профиль не найден, выводим ошибку 404
+                cmsCore::error404();
+            }
+
+        } else {
+
+            // Не цифровой - ищем профиль пользователя по slug
+            $profile = $this->model->getUserBySlug($action_name);
+
+            // Если юзер не найден, то это может быть экшен
+            if (!$profile) { return $action_name; }
+
+        }
+
+        // Разблокируем вызов экшенов, которым запрещено вызываться напрямую
         $this->lock_explicit_call = false;
 
-        $user_id   = $action_name;
         $is_logged = $this->cms_user->is_logged;
-
-        $profile = $this->model->getUser($user_id);
-        if (!$profile) { cmsCore::error404(); }
 
         if (!$is_logged && $this->options['is_auth_only']){
             cmsUser::goLogin();
@@ -72,8 +93,8 @@ class users extends cmsFrontend {
         $menu = array(
             array(
                 'title' => LANG_USERS_PROFILE_INDEX,
-                'url' => href_to($this->name, $profile['id']),
-                'url_mask' => href_to($this->name, $profile['id']),
+                'url' => href_to($this->name, $profile['slug']),
+                'url_mask' => href_to($this->name, $profile['slug']),
             )
         );
 
@@ -100,7 +121,7 @@ class users extends cmsFrontend {
 
 				$default_tab_info = array(
 					'title' => $tab['title'],
-                    'url'   => href_to($this->name, $profile['id'], $tab['name'])
+                    'url'   => href_to($this->name, $profile['slug'], $tab['name'])
                 );
 
 				if (empty($this->tabs_controllers[$tab['controller']])){
@@ -137,7 +158,7 @@ class users extends cmsFrontend {
         $menu[] = array(
             'title' => LANG_USERS_EDIT_PROFILE_MAIN,
             'controller' => $this->name,
-            'action' => $profile['id'],
+            'action' => $profile['slug'],
             'params' => 'edit',
         );
 
@@ -145,7 +166,7 @@ class users extends cmsFrontend {
             $menu[] = array(
                 'title' => LANG_USERS_EDIT_PROFILE_THEME,
                 'controller' => $this->name,
-                'action' => $profile['id'],
+                'action' => $profile['slug'],
                 'params' => array('edit', 'theme'),
             );
         }
@@ -153,28 +174,28 @@ class users extends cmsFrontend {
         $menu[] = array(
             'title' => LANG_USERS_EDIT_PROFILE_NOTICES,
             'controller' => $this->name,
-            'action' => $profile['id'],
+            'action' => $profile['slug'],
             'params' => array('edit', 'notices'),
         );
 
         $menu[] = array(
             'title' => LANG_USERS_EDIT_PROFILE_PRIVACY,
             'controller' => $this->name,
-            'action' => $profile['id'],
+            'action' => $profile['slug'],
             'params' => array('edit', 'privacy'),
         );
 
         $menu[] = array(
             'title' => LANG_PASSWORD,
             'controller' => $this->name,
-            'action' => $profile['id'],
+            'action' => $profile['slug'],
             'params' => array('edit', 'password'),
         );
 
         $menu[] = array(
             'title'      => LANG_USERS_SESSIONS,
             'controller' => $this->name,
-            'action'     => $profile['id'],
+            'action'     => $profile['slug'],
             'params'     => array('edit', 'sessions')
         );
 

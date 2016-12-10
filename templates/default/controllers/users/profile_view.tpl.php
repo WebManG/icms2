@@ -34,7 +34,7 @@
                 'title' => LANG_USERS_MY_INVITES,
                 'class' => 'invites',
                 'counter' => $profile['invites_count'],
-                'href' => $this->href_to($profile['id'], 'invites')
+                'href' => $this->href_to($profile['slug'], 'invites')
             );
         }
 
@@ -42,7 +42,7 @@
             $tool_buttons['settings'] = array(
                 'title' => LANG_USERS_EDIT_PROFILE,
                 'class' => 'settings',
-                'href' => $this->href_to($profile['id'], 'edit')
+                'href' => $this->href_to($profile['slug'], 'edit')
             );
         }
 
@@ -50,7 +50,7 @@
             $tool_buttons['edit'] = array(
                 'title' => LANG_USERS_EDIT_USER,
                 'class' => 'edit',
-                'href' => href_to('admin', 'users', array('edit', $profile['id'])) . "?back=" . $this->href_to($profile['id'])
+                'href' => href_to('admin', 'users', array('edit', $profile['id'])) . "?back=" . $this->href_to($profile['slug'])
             );
         }
 
@@ -89,7 +89,7 @@
                     <?php foreach($content_counts as $ctype_name=>$count){ ?>
                         <?php if (!$count['is_in_list']) { continue; } ?>
                         <li>
-                            <a href="<?php echo href_to('users', $profile['id'], array('content', $ctype_name)); ?>">
+                            <a href="<?php echo href_to('users', $profile['slug'], array('content', $ctype_name)); ?>">
                                 <?php html($count['title']); ?>
                                 <span class="counter"><?php html($count['count']); ?></span>
                             </a>
@@ -102,12 +102,12 @@
         <?php if ($is_friends_on && $friends) { ?>
             <div class="block">
                 <div class="block-title">
-                    <a href="<?php echo $this->href_to($profile['id'], 'friends'); ?>"><?php echo LANG_USERS_FRIENDS; ?></a>
+                    <a href="<?php echo $this->href_to($profile['slug'], 'friends'); ?>"><?php echo LANG_USERS_FRIENDS; ?></a>
                     (<?php echo $profile['friends_count']; ?>)
                 </div>
                 <div class="friends-list">
                     <?php foreach($friends as $friend){ ?>
-                        <a href="<?php echo $this->href_to($friend['id']); ?>" title="<?php html($friend['nickname']); ?>">
+                        <a href="<?php echo $this->href_to($friend['slug']); ?>" title="<?php html($friend['nickname']); ?>">
                             <span><?php echo html_avatar_image($friend['avatar'], 'micro', $friend['nickname']); ?></span>
                         </a>
                     <?php } ?>
@@ -137,7 +137,7 @@
                 <?php if ($profile['inviter_id']) { ?>
                 <li>
                     <strong><?php echo LANG_USERS_PROFILE_INVITED_BY; ?>:</strong>
-                    <a href="<?php echo href_to('users', $profile['inviter_id']); ?>"><?php html($profile['inviter_nickname']); ?></a>
+                    <a href="<?php echo href_to('users', $profile['inviter_slug']); ?>"><?php html($profile['inviter_nickname']); ?></a>
                 </li>
                 <?php } ?>
 

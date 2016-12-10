@@ -860,6 +860,12 @@ class cmsController {
         return true;
     }
 
+    public function validate_userslug($value){
+        if (empty($value)) { return true; }
+        if (!is_string($value) || !preg_match("/^([a-z0-9\_]*[a-z]+[a-z0-9\_]*)$/i", $value)){ return ERR_VALIDATE_USERSLUG; }
+        return true;
+    }
+
     public function validate_digits($value){
         if (empty($value)) { return true; }
         if (!in_array(gettype($value), array('integer','string')) || !preg_match("/^([0-9]+)$/i", $value)){ return ERR_VALIDATE_DIGITS; }

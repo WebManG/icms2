@@ -4,7 +4,7 @@
     $this->setPageDescription($profile['nickname'].' — '.$tab['title']);
 
     $this->addBreadcrumb(LANG_USERS, $this->href_to(''));
-    $this->addBreadcrumb($profile['nickname'], $this->href_to($profile['id']));
+    $this->addBreadcrumb($profile['nickname'], $this->href_to($profile['slug']));
     $this->addBreadcrumb($tab['title']);
 
 ?>

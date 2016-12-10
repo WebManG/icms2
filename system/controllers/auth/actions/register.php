@@ -48,13 +48,40 @@ class actionAuthRegister extends cmsAction {
 
         }
 
+        // Получаем адрес контроллера пользователей с учётом алиаса
+        // для подстановки в пример адреса пользователя
+        $users_controller_url = cmsCore::getControllerAliasByName('users');
+        if (!$users_controller_url) { $users_controller_url = 'users'; }
+        $users_controller_url = cmsConfig::get('host').'/'.$users_controller_url;
+
+        //
+        // Добавляем поле для адреса профиля пользователя, если нужно
+        //
+        if ($this->options['reg_user_slug'] == 'slug'){
+
+            $form->addFieldToBeginning('basic', new fieldString('slug', array(
+                'title' => LANG_USER_SLUG,
+                'hint' => LANG_USER_SLUG_HINT.'<br />'.sprintf(LANG_USER_URL_HINT, $users_controller_url),
+                'rules' => array(
+                    array('min_length', 4),
+                    array('max_length', 64),
+                    array('userslug'),
+                    array('required'),
+                    array('unique', '{users}', 'slug')
+            ))));
+
+        }
+
         //
         // Добавляем в форму обязательные поля профилей
         //
-        $content_model = cmsCore::getModel('content');
-        $content_model->setTablePrefix('');
-        $content_model->orderBy('ordering');
-        $fields = $content_model->getRequiredContentFields('{users}');
+
+
+        // Получаем список обязательных полей
+        $fields = cmsCore::getModel('content')->
+                  setTablePrefix('')->
+                  orderBy('ordering')->
+                  getRequiredContentFields('{users}');
 
         // Разбиваем поля по группам
         $fieldsets = cmsForm::mapFieldsToFieldsets($fields);
@@ -64,19 +91,56 @@ class actionAuthRegister extends cmsAction {
 
             $fieldset_id = $form->addFieldset($fieldset['title']);
 
+            // Сортируем поля основного набора (с пустым именем) в обратном порядке,
+            // так как их добавление будет в начало набора
+            if (!$fieldset['title']) { krsort($fieldset['fields']); }
+
             foreach($fieldset['fields'] as $field){
 
+/* WebMan:  Пусть админ сам решает, какие поля запрашивать при регистрации, а какие - нет
                 if ($field['name'] == 'nickname') {
                     $form->addFieldToBeginning('basic', $field['handler']);
                 }
 
-                if ($field['is_system']) { continue; }
+                 if ($field['is_system']) { continue; }
+*/
+                if ($field['name'] == $this->options['reg_user_slug']) {
+                    // Добавляем к этому полю подсказку про адрес страницы пользователя
+                    $field['handler']->hint .= ( $field['hint'] ? '<br />' : '') .
+                            sprintf(LANG_USER_URL_HINT, $users_controller_url);
+                }
 
-                $form->addField($fieldset_id, $field['handler']);
+                if (!$fieldset['title']) {
+                    // Добавляем это поле для авторизации в начало формы
+                    $form->addFieldToBeginning('basic', $field['handler']);
+                } else {
+                    // Добавляем это поле в свою группу
+                    $form->addField($fieldset_id, $field['handler']);
+                }
 
             }
 
         }
+
+        //
+        // Добавляем галку согласия с правилами сайта,
+        // если заполнено поле ссылки на "Правила"
+        //
+        if ($this->options['rules_url']){
+
+            $fieldset_id = $form->addFieldset(LANG_REG_RULES_SET);
+
+            $form->addField($fieldset_id, new fieldCheckbox('rules_agree', array(
+                'title' => sprintf(LANG_REG_RULES_AGREE, $this->options['rules_url']),
+                'default' => false,
+                'rules' => array(
+                    array('required'),
+                )
+            )));
+
+        }
+
+    	$form = cmsEventsManager::hook('user_register_form', $form);
 
         $user = array();
 
@@ -147,11 +211,20 @@ class actionAuthRegister extends cmsAction {
                 }
 
                 //
-                // проверяем допустимость e-mail, имени и IP
+                // Проверяем допустимость e-mail, логина, никнейма и IP
                 //
                 if (!$this->isEmailAllowed($user['email'])){
                     $errors['email'] = sprintf(LANG_AUTH_RESTRICTED_EMAIL, $user['email']);
                 }
+
+                if ($this->options['reg_user_slug'] != 'id'){
+                    if (!$this->isSlugAllowed($user[$this->options['reg_user_slug']]) || cmsCore::getController('users')->isActionExists($user[$this->options['reg_user_slug']])){
+                        $errors[$this->options['reg_user_slug']] = sprintf(LANG_AUTH_RESTRICTED_SLUG, $user[$this->options['reg_user_slug']]);
+                    }
+                }
+
+                // Добавляем поле никнейма при регистрации без него
+                if (!isset($user['nickname'])) { $user['nickname'] = ''; }
 
                 if (!$this->isNameAllowed($user['nickname'])){
                     $errors['nickname'] = sprintf(LANG_AUTH_RESTRICTED_NAME, $user['nickname']);
@@ -163,6 +236,8 @@ class actionAuthRegister extends cmsAction {
                 }
 
             }
+
+			list($user, $errors) = cmsEventsManager::hook('user_before_register', array($user, $errors));
 
             //
             // Проверяем капчу
@@ -198,7 +273,7 @@ class actionAuthRegister extends cmsAction {
 
                 if ($result['success']){
 
-					$user['id'] = $result['id'];
+                    $user['id'] = $result['id'];
 
                     cmsUser::addSessionMessage(LANG_REG_SUCCESS, 'success');
 
@@ -229,7 +304,12 @@ class actionAuthRegister extends cmsAction {
                         // авторизуем пользователя автоматически
                         if ($this->options['reg_auto_auth']){
 
-                            $logged_id = cmsUser::login($user['email'], $user['password1']);
+                            $logged_id = cmsUser::login(
+                                $user[$this->options['auth_by']],
+                                $user['password1'],
+                                false,
+                                $this->options['auth_by']
+                            );
 
                             if ($logged_id){
 

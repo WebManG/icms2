@@ -52,11 +52,12 @@ class formUsersField extends cmsForm {
                 'childs' => array(
                     new fieldList('fieldset', array(
                         'title' => LANG_CP_FIELD_FIELDSET_SELECT,
+                        'default' => '',
                         'generator' => function($field) {
                             $model = cmsCore::getModel('content');
                             $model->setTablePrefix('');
                             $fieldsets = $model->getContentFieldsets('{users}');
-                            $items = array('');
+                            $items = array(''  => '-');
                             foreach($fieldsets as $fieldset) { $items[$fieldset] = $fieldset; }
                             return $items;
                         }

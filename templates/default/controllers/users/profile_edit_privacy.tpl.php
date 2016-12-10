@@ -3,8 +3,8 @@
     $this->setPageTitle(LANG_USERS_EDIT_PROFILE_PRIVACY);
 
     $this->addBreadcrumb(LANG_USERS, href_to('users'));
-    $this->addBreadcrumb($profile['nickname'], href_to('users', $id));
-    $this->addBreadcrumb(LANG_USERS_EDIT_PROFILE, href_to('users', $id, 'edit'));
+    $this->addBreadcrumb($profile['nickname'], href_to('users', $profile['slug']));
+    $this->addBreadcrumb(LANG_USERS_EDIT_PROFILE, href_to('users', $profile['slug'], 'edit'));
     $this->addBreadcrumb(LANG_USERS_EDIT_PROFILE_PRIVACY);
 
     $this->addToolButton(array(
@@ -16,7 +16,7 @@
     $this->addToolButton(array(
         'class' => 'cancel',
         'title' => LANG_CANCEL,
-        'href'  => href_to('users', $id)
+        'href'  => href_to('users', $profile['slug'])
     ));
 
 

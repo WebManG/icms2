@@ -169,7 +169,7 @@
     define('LANG_RETYPE_PASSWORD',           'Повторите пароль');
     define('LANG_USER_GROUP',                'Группа');
     define('LANG_USER_IS_ADMIN',             'Администратор');
-    define('LANG_LOGIN_ERROR',               'Вход не выполнен. Проверьте правильность адреса e-mail и пароля.');
+    define('LANG_LOGIN_ERROR',               'Вход не выполнен. Введите правильные данные для входа.');
     define('LANG_LOGIN_REQUIRED',            'Для доступа к запрошенной странице необходима авторизация');
     define('LANG_LOGIN_ADMIN_ONLY',          'Войти на отключенный сайт может только администратор');
     define('LANG_NICKNAME',                  'Никнейм');

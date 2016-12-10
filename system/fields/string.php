@@ -22,6 +22,9 @@ class fieldString extends cmsFormField {
             )),
             new fieldCheckbox('show_symbol_count', array(
                 'title' => LANG_PARSER_SHOW_SYMBOL_COUNT
+            )),
+            new fieldString('regexp', array(
+                'title' => LANG_PARSER_REGEXP,
             ))
         );
     }
@@ -34,6 +37,10 @@ class fieldString extends cmsFormField {
 
         if ($this->getOption('max_length')){
             $this->rules[] = array('max_length', $this->getOption('max_length'));
+        }
+
+        if ($this->getOption('regexp')){
+            $this->rules[] = array('regexp', $this->getOption('regexp'));
         }
 
         return $this->rules;

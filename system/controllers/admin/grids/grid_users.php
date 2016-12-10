@@ -35,6 +35,28 @@ function grid_users($controller){
             'width'  => 200,
             'filter' => 'like'
         ),
+    );
+
+    $auth_by = cmsCore::getController('auth')->options['auth_by'];
+
+    // Добавляем в таблицу поле для авторизации, если это не email
+    if ($auth_by != 'email') {
+
+        $columns += array(
+            $auth_by => array(
+                'title' => cmsCore::getController('Auth')->getAuthByTitle(),
+                'filter' => 'like'
+            )
+        );
+
+    }
+
+    $columns += array(
+        'slug' => array(
+            'title' => LANG_SLUG,
+            'width' => 50,
+            'filter' => 'like'
+        ),
         'ip' => array(
             'title' => LANG_USERS_PROFILE_LAST_IP,
             'width' => 120,
@@ -54,7 +76,7 @@ function grid_users($controller){
         ),
         'karma' => array(
             'title' => LANG_KARMA,
-            'width' => 60,
+            'width' => 50,
             'filter' => 'exact',
             'handler' => function($value){
                 return '<span class="'.  html_signed_class($value).'">'.html_signed_num($value).'</span>';
@@ -62,13 +84,13 @@ function grid_users($controller){
         ),
         'rating' => array(
             'title' => LANG_RATING,
-            'width' => 60,
+            'width' => 50,
             'filter' => 'exact'
         ),
         'is_locked' => array(
             'title' => LANG_CP_USER_LOCKED,
             'flag' => 'flag_lock',
-            'width' => 24,
+            'width' => 20,
             'handler' => function($value, $user){
                 $title = $user['is_locked'] ? ($user['lock_reason'] ? $user['lock_reason'] : LANG_TO.' '.strip_tags(html_date($user['lock_until']))) : '';
                 return '<div class="tooltip" title="'.$title.'">'.$value.'</div>';
@@ -80,7 +102,7 @@ function grid_users($controller){
         array(
             'title' => LANG_PROFILE,
             'class' => 'view tooltip',
-            'href' => href_to('users', '{id}')
+            'href' => href_to('users', '{slug}')
         ),
         array(
             'title' => LANG_EDIT,

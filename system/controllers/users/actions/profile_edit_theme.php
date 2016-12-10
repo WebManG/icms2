@@ -33,7 +33,7 @@ class actionUsersProfileEditTheme extends cmsAction {
 
                 cmsUser::addSessionMessage(LANG_SUCCESS_MSG, 'success');
 
-                $this->redirectTo('users', $profile['id']);
+                $this->redirectTo('users', $profile['slug']);
 
             }
 

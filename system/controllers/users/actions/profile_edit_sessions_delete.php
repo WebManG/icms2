@@ -17,12 +17,12 @@ class actionUsersProfileEditSessionsDelete extends cmsAction {
         $this->model->deleteAuthToken($ses['auth_token']);
 
         if ($ses['user_id'] == $this->cms_user->id) {
-            self::unsetCookie('auth');
+            cmsUser::unsetCookie('auth');
         }
 
         cmsUser::addSessionMessage(LANG_USERS_SESSIONS_DELETE, 'success');
 
-        $this->redirectToAction($profile['id'], array('edit', 'sessions'));
+        $this->redirectToAction($profile['slug'], array('edit', 'sessions'));
 
     }
 

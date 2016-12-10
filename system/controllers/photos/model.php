@@ -80,6 +80,7 @@ class modelPhotos extends cmsModel{
                 $item['user'] = array(
                     'id'       => $item['user_id'],
                     'nickname' => $item['user_nickname'],
+                    'slug'     => $item['user_slug'],
                     'avatar'   => $item['user_avatar']
                 );
             }
@@ -147,6 +148,7 @@ class modelPhotos extends cmsModel{
             $item['user'] = array(
                 'id'       => $item['user_id'],
                 'nickname' => $item['user_nickname'],
+                'slug'     => $item['user_slug'],
                 'avatar'   => $item['user_avatar']
             );
 

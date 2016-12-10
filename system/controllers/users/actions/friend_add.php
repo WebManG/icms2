@@ -96,7 +96,7 @@ class actionUsersFriendAdd extends cmsAction {
         //
         // Личное сообщение
         //
-        $sender_link = '<a href="'.href_to($this->name, $user->id).'">'.$user->nickname.'</a>';
+        $sender_link = '<a href="'.href_to($this->name, $user->slug).'">'.$user->nickname.'</a>';
 
         $notice = array(
             'content' => sprintf(LANG_USERS_FRIENDS_NOTICE, $sender_link),
@@ -127,7 +127,7 @@ class actionUsersFriendAdd extends cmsAction {
         //
         $messenger->sendNoticeEmail('users_friend_add', array(
             'friend_nickname' => $user->nickname,
-            'friend_url' => href_to_abs('users', $user->id),
+            'friend_url' => href_to_abs('users', $user->slug),
         ));
 
     }
@@ -140,7 +140,7 @@ class actionUsersFriendAdd extends cmsAction {
 
         $messenger->addRecipient($friend['id']);
 
-        $sender_link = '<a href="'.href_to($this->name, $user->id).'">'.$user->nickname.'</a>';
+        $sender_link = '<a href="'.href_to($this->name, $user->slug).'">'.$user->nickname.'</a>';
 
         $notice = array(
             'content' => sprintf(LANG_USERS_FRIENDS_DONE, $sender_link),

@@ -327,6 +327,8 @@ class modelContent extends cmsModel{
 
     public function getContentFolder($id){
 
+        $this->joinUser();
+
         return $this->getItemById('content_folders', $id);
 
     }
@@ -1855,6 +1857,7 @@ class modelContent extends cmsModel{
         $table_name = $this->table_prefix . $ctype_name;
 
         $this->select('u.nickname', 'user_nickname');
+        $this->select('u.slug', 'user_slug');
         $this->select('f.title', 'folder_title');
         $this->join('{users}', 'u FORCE INDEX (PRIMARY)', 'u.id = i.user_id');
         $this->joinLeft('content_folders', 'f', 'f.id = i.folder_id');
@@ -1874,6 +1877,7 @@ class modelContent extends cmsModel{
             $item['user'] = array(
                 'id'        => $item['user_id'],
                 'nickname'  => $item['user_nickname'],
+                'slug'      => $item['user_slug'],
                 'is_friend' => $user->isFriend($item['user_id'])
             );
 
@@ -1902,6 +1906,7 @@ class modelContent extends cmsModel{
             $item['user'] = array(
                 'id'       => $item['user_id'],
                 'nickname' => $item['user_nickname'],
+                'slug'     => $item['user_slug'],
                 'avatar'   => $item['user_avatar']
             );
 

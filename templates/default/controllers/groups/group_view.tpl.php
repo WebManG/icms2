@@ -53,7 +53,7 @@
                 </li>
                 <li>
                     <strong><?php echo LANG_GROUP_INFO_OWNER; ?>:</strong>
-                    <a href="<?php echo href_to('users', $group['owner_id']); ?>"><?php html($group['owner_nickname']); ?></a>
+                    <a href="<?php echo href_to('users', $group['owner_slug']); ?>"><?php html($group['owner_nickname']); ?></a>
                 </li>
                 <li>
                     <strong><?php echo LANG_GROUP_INFO_MEMBERS; ?>:</strong>

@@ -58,6 +58,7 @@ class modelRating extends cmsModel{
             $item['user'] = array(
                 'id'       => $item['user_id'],
                 'nickname' => (!empty($item['user_nickname']) ? $item['user_nickname'] : LANG_GUEST.' №'.array_sum($_okets)),
+                'slug'     => $item['user_slug'],
                 'avatar'   => $item['user_avatar']
             );
 

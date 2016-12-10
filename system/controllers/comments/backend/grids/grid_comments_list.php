@@ -36,7 +36,7 @@ function grid_comments_list($controller){
             'width'   => 180,
             'handler' => function($value, $row) {
                 if ($row['user_id']) {
-                    $v = '<a target="_blank" href="' . href_to('users', $row['user_id']) . '">' . $row['user_nickname'] . '</a>';
+                    $v = '<a target="_blank" href="' . href_to('users', $row['user_slug']) . '">' . $row['user_nickname'] . '</a>';
                 } else {
                     $v = '<span class="guest_name">' . $row['author_name'] . '</span>';
                     if (!empty($row['author_email'])) {

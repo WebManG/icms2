@@ -5,7 +5,7 @@ class actionAuthLogin extends cmsAction {
 
         if (cmsUser::isLogged()) { $this->redirectToHome(); }
 
-        $email    = $this->request->get('login_email', '');
+        $login    = $this->request->get('login_login', '');
         $password = $this->request->get('login_password', '');
         $remember = (bool)$this->request->get('remember');
         $back_url = $this->request->get('back', '');
@@ -25,7 +25,7 @@ class actionAuthLogin extends cmsAction {
 
                 cmsUser::sessionUnset('is_auth_captcha');
 
-                $logged_id  = cmsUser::login($email, $password, $remember);
+                $logged_id  = cmsUser::login($login, $password, $remember, $this->options['auth_by']);
 
                 if ($logged_id){
 

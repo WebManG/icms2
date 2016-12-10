@@ -44,7 +44,7 @@ class actionUsersNotices extends cmsAction {
                 // Обновляем профиль и редиректим на его просмотр
                 $this->model->updateUser($id, $profile);
 
-                $this->redirectTo('users', $id);
+                $this->redirectTo('users', $profile['slug']);
 
             }
 
