@@ -3,8 +3,8 @@
     $this->setPageTitle(LANG_USERS_SESSIONS);
 
     $this->addBreadcrumb(LANG_USERS, href_to('users'));
-    $this->addBreadcrumb($profile['nickname'], href_to('users', $id));
-    $this->addBreadcrumb(LANG_USERS_EDIT_PROFILE, href_to('users', $id, 'edit'));
+    $this->addBreadcrumb($profile['nickname'], href_to('users', $profile['slug']));
+    $this->addBreadcrumb(LANG_USERS_EDIT_PROFILE, href_to('users', $profile['slug'], 'edit'));
     $this->addBreadcrumb(LANG_USERS_SESSIONS);
 
     $this->renderChild('profile_edit_header', array('profile'=>$profile));
@@ -35,7 +35,7 @@
                         </a>
                     </td>
                     <td>
-                        <a href="<?php echo $this->href_to($id, array('edit', 'sessions_delete', $session['id'])); ?>"><?php echo LANG_SESS_DROP; ?></a>
+                        <a href="<?php echo $this->href_to($profile['slug'], array('edit', 'sessions_delete', $session['id'])); ?>"><?php echo LANG_SESS_DROP; ?></a>
                     </td>
                 </tr>
 

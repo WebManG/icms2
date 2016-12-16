@@ -41,7 +41,7 @@ class actionUsersProfileEditPassword extends cmsAction {
 
                 if ($result['success']){
                     cmsUser::addSessionMessage(LANG_PASS_CHANGED, 'success');
-                    $this->redirectTo('users', $profile['id']);
+                    $this->redirectTo('users', $profile['slug']);
                 } else {
                     $errors = $result['errors'];
                 }

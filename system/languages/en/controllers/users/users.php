@@ -30,6 +30,14 @@
     define('LANG_USERS_OPT_KARMA_TIME',     'Reputation voting period, days');
     define('LANG_USERS_OPT_KARMA_TIME_HINT','A user will be able to vote for another user\'s reputation only once in a specified period');
 
+    define('LANG_USERS_OPT_SLUG_EDIT',            'Editing of profile addresses by the users is');
+    define('LANG_USERS_OPT_SLUG_EDIT_FORBIDDEN',  'Forbidden');
+    define('LANG_USERS_OPT_SLUG_EDIT_ONCEFROMID', 'Allowed once from id');
+    define('LANG_USERS_OPT_SLUG_EDIT_ALLOWED',    'Allowed');
+    define('LANG_USERS_OPT_SLUG_FIELD',           'When editing a profile address use the field');
+    define('LANG_USERS_OPT_SLUG_FIELD_SLUG',      'Profile address (slug)');
+    define('LANG_USERS_PROFILE_SLUG_ONCEFROMID',  '<span style="color:red">(Address can be set once only!)</span>');
+
     define('LANG_USERS_MIG_TITLE',              'Rule title');
     define('LANG_USERS_MIG_IS_ACTIVE',          'Rule is active');
     define('LANG_USERS_MIG_ADD',                'New Migration Rule');

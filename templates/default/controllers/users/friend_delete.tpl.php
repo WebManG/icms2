@@ -3,7 +3,7 @@
     $this->setPageTitle(LANG_USERS_FRIENDS_DELETE);
 
     $this->addBreadcrumb(LANG_USERS, href_to('users'));
-    $this->addBreadcrumb($friend['nickname'], $this->href_to($friend['id']));
+    $this->addBreadcrumb($friend['nickname'], $this->href_to($friend['slug']));
     $this->addBreadcrumb(LANG_USERS_FRIENDS_DELETE);
 
 ?>

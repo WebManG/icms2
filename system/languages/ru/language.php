@@ -147,6 +147,7 @@
     define('LANG_PARSER_IN_FULLTEXT_SEARCH_HINT', 'Внимание! При изменении этой опции индекс будет перестроен. На больших таблицах это может занять продолжительное время.');
     define('LANG_PARSER_ADD_FROM_LINK', 'добавить по ссылке');
     define('LANG_PARSER_ENTER_IMAGE_LINK', 'Введите ссылку на изображение');
+    define('LANG_PARSER_REGEXP',             'Регулярное выражение');
     define('LANG_OR', 'или');
     define('LANG_BEGIN_TYPING', 'Начните вводить или выберите из списка');
 
@@ -169,7 +170,7 @@
     define('LANG_RETYPE_PASSWORD',           'Повторите пароль');
     define('LANG_USER_GROUP',                'Группа');
     define('LANG_USER_IS_ADMIN',             'Администратор');
-    define('LANG_LOGIN_ERROR',               'Вход не выполнен. Проверьте правильность адреса e-mail и пароля.');
+    define('LANG_LOGIN_ERROR',               'Вход не выполнен. Введите правильные данные для входа.');
     define('LANG_LOGIN_REQUIRED',            'Для доступа к запрошенной странице необходима авторизация');
     define('LANG_LOGIN_ADMIN_ONLY',          'Войти на отключенный сайт может только администратор');
     define('LANG_NICKNAME',                  'Никнейм');
@@ -197,6 +198,10 @@
     define('LANG_ONLINE',                    'Онлайн');
     define('LANG_USERS_PROFILE_LAST_IP',     'Последний IP');
     define('LANG_USERS_PROFILE_LOGDATE',     'Последний визит');
+    define('LANG_USER_PROFILE_SLUG',         'Адрес профиля');
+    define('LANG_USER_SLUG',                 'Красивое имя для адреса Ваших страниц');
+    define('LANG_USER_SLUG_HINT',            'Разрешены заглавные или строчные латинские буквы (хотя бы одна), цифры и символ "_". Длина 4-100 символов.');
+    define('LANG_USER_URL_HINT',             'Адрес Вашей страницы будет <strong>%s/<span id="userurl" class="userurl"></span></strong>');
 
     //MODERATION
     define('LANG_MODERATION',                'Модерация');
@@ -271,6 +276,7 @@
     define('ERR_VALIDATE_ALPHANUMERIC',      'Только латинские буквы и цифры');
     define('ERR_VALIDATE_SYSNAME',           'Только латинские буквы (в нижнем регистре), цифры и знаки подчеркивания');
     define('ERR_VALIDATE_SLUG',              'Только латинские буквы (в нижнем регистре), цифры, дефис и прямой слеш');
+    define('ERR_VALIDATE_USERSLUG',          'Только заглавные или строчные латинские буквы (хотя бы одна), цифры и символ "_"');
     define('ERR_VALIDATE_DIGITS',            'Введите только цифры');
     define('ERR_VALIDATE_NUMBER',            'Введите число');
     define('ERR_VALIDATE_UNIQUE',            'Значение уже используется');

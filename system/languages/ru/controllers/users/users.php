@@ -30,6 +30,14 @@
     define('LANG_USERS_OPT_KARMA_TIME',     'Период голосования за репутацию, дней');
     define('LANG_USERS_OPT_KARMA_TIME_HINT','Пользователь сможет оценивать репутацию другого пользователя только один раз в указанный период');
 
+    define('LANG_USERS_OPT_SLUG_EDIT',            'Редактирование адреса профиля пользователем');
+    define('LANG_USERS_OPT_SLUG_EDIT_FORBIDDEN',  'Запрещено');
+    define('LANG_USERS_OPT_SLUG_EDIT_ONCEFROMID', 'Разрешено один раз после id');
+    define('LANG_USERS_OPT_SLUG_EDIT_ALLOWED',    'Разрешено');
+    define('LANG_USERS_OPT_SLUG_FIELD',           'При редактировании адреса профиля использовать поле');
+    define('LANG_USERS_OPT_SLUG_FIELD_SLUG',      'Адрес профиля (slug)');
+    define('LANG_USERS_PROFILE_SLUG_ONCEFROMID',  '<span style="color:red">(Можно изменить только один раз!)</span>');
+
     define('LANG_USERS_MIG_TITLE',              'Название правила');
     define('LANG_USERS_MIG_IS_ACTIVE',          'Правило активно');
     define('LANG_USERS_MIG_ADD',                'Создать правило перевода');

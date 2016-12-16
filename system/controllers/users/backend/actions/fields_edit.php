@@ -29,7 +29,7 @@ class actionUsersFieldsEdit extends cmsAction {
         }
 
         // удалим выбор типа для полей с фиксированным типом
-        if ($field['is_fixed_type']) { $form->removeFieldset('type'); }
+        if ($field['is_fixed_type']) { $form->hideField('type', 'type'); }
 
         if ($this->request->has('submit')){
 

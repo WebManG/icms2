@@ -150,6 +150,9 @@ class formAdminCtypesField extends cmsForm {
                     new fieldCheckbox('options:is_unique', array(
                         'title' => LANG_VALIDATE_UNIQUE,
                     )),
+                    new fieldString('options:regexp', array(
+                        'title' => LANG_PARSER_REGEXP,
+                    )),
                 )
             ),
             'values' => array(

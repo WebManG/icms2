@@ -123,6 +123,7 @@ class modelActivity extends cmsModel{
     public function getEntries(){
 
         $this->select('u.nickname', 'user_nickname');
+        $this->select('u.slug', 'user_slug');
         $this->select('u.avatar', 'user_avatar');
         $this->join('{users}', 'u', 'u.id = i.user_id');
 
@@ -142,6 +143,7 @@ class modelActivity extends cmsModel{
             $item['user'] = array(
                 'id'       => $item['user_id'],
                 'nickname' => $item['user_nickname'],
+                'slug'     => $item['user_slug'],
                 'avatar'   => $item['user_avatar']
             );
 

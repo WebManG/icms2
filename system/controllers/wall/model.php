@@ -46,9 +46,10 @@ class modelWall extends cmsModel{
         $entries = $this->get('wall_entries', function($item, $model){
 
             $item['user'] = array(
-                'id' => $item['user_id'],
+                'id'       => $item['user_id'],
                 'nickname' => $item['user_nickname'],
-                'avatar' => $item['user_avatar']
+                'slug'     => $item['user_slug'],
+                'avatar'   => $item['user_avatar']
             );
 
             return $item;
@@ -71,9 +72,10 @@ class modelWall extends cmsModel{
         $entries = $this->get('wall_entries', function($item, $model){
 
             $item['user'] = array(
-                'id' => $item['user_id'],
+                'id'       => $item['user_id'],
                 'nickname' => $item['user_nickname'],
-                'avatar' => $item['user_avatar']
+                'slug'     => $item['user_slug'],
+                'avatar'   => $item['user_avatar']
             );
 
             $item['replies_count'] = 0;
@@ -93,14 +95,17 @@ class modelWall extends cmsModel{
                         getItemById('wall_entries', $id, function($item, $model){
 
                             $item['user'] = array(
-                                'id' => $item['user_id'],
+                                'id'       => $item['user_id'],
                                 'nickname' => $item['user_nickname'],
-                                'avatar' => $item['user_avatar']
+                                'slug'     => $item['user_slug'],
+                                'avatar'   => $item['user_avatar']
                             );
 
                             return $item;
 
                         });
+
+        $entry['profile_slug'] = cmsCore::getController('users')->model->getUserSlug($entry['profile_id']);
 
         return $entry;
 

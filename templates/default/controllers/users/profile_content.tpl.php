@@ -3,8 +3,8 @@
     $list_header = empty($ctype['labels']['profile']) ? $ctype['title'] : $ctype['labels']['profile'];
 
     $this->addBreadcrumb(LANG_USERS, href_to('users'));
-    $this->addBreadcrumb($profile['nickname'], href_to('users', $profile['id']));
-    $this->addBreadcrumb($list_header, href_to('users', $profile['id'], array('content', $ctype['name'])));
+    $this->addBreadcrumb($profile['nickname'], href_to('users', $profile['slug']));
+    $this->addBreadcrumb($list_header, href_to('users', $profile['slug'], array('content', $ctype['name'])));
 
     if ($folders && $folder_id && isset($folders[$folder_id])){
 
@@ -68,11 +68,11 @@
     <?php } ?>
 
     <div class="avatar">
-        <a href="<?php echo $this->href_to($profile['id']); ?>"><?php echo html_avatar_image($profile['avatar'], 'micro', $profile['nickname']); ?></a>
+        <a href="<?php echo $this->href_to($profile['slug']); ?>"><?php echo html_avatar_image($profile['avatar'], 'micro', $profile['nickname']); ?></a>
     </div>
 
     <div class="name">
-        <a href="<?php echo $this->href_to($profile['id']); ?>"><?php html($profile['nickname']); ?></a> /
+        <a href="<?php echo $this->href_to($profile['slug']); ?>"><?php html($profile['nickname']); ?></a> /
         <span><?php echo $list_header; ?></span>
     </div>
 
@@ -85,8 +85,8 @@
                 <?php
                     $is_selected = $folder['id'] == $folder_id;
                     $url = $folder['id'] ?
-                                $this->href_to($profile['id'], array('content', $ctype['name'], $folder['id'])) :
-                                $this->href_to($profile['id'], array('content', $ctype['name']));
+                                $this->href_to($profile['slug'], array('content', $ctype['name'], $folder['id'])) :
+                                $this->href_to($profile['slug'], array('content', $ctype['name']));
                 ?>
                 <li <?php if ($is_selected){ ?>class="active"<?php } ?>>
                     <?php if ($is_selected){ $current_folder = $folder; ?>

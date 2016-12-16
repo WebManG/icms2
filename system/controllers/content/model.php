@@ -327,6 +327,8 @@ class modelContent extends cmsModel{
 
     public function getContentFolder($id){
 
+        $this->joinUser();
+
         return $this->getItemById('content_folders', $id);
 
     }
@@ -492,6 +494,9 @@ class modelContent extends cmsModel{
             if ($item['options']['is_number']) {  $rules[] = array('number'); }
             if ($item['options']['is_alphanumeric']) {  $rules[] = array('alphanumeric'); }
             if ($item['options']['is_email']) {  $rules[] = array('email'); }
+            if (isset($item['options']['regexp']) && $item['options']['regexp']!='') {
+                $rules[] = array('regexp', $item['options']['regexp']);
+            }
 
             if ($item['options']['is_unique']) {
                 if (!$item_id){
@@ -1855,6 +1860,7 @@ class modelContent extends cmsModel{
         $table_name = $this->table_prefix . $ctype_name;
 
         $this->select('u.nickname', 'user_nickname');
+        $this->select('u.slug', 'user_slug');
         $this->select('f.title', 'folder_title');
         $this->join('{users}', 'u FORCE INDEX (PRIMARY)', 'u.id = i.user_id');
         $this->joinLeft('content_folders', 'f', 'f.id = i.folder_id');
@@ -1874,6 +1880,7 @@ class modelContent extends cmsModel{
             $item['user'] = array(
                 'id'        => $item['user_id'],
                 'nickname'  => $item['user_nickname'],
+                'slug'      => $item['user_slug'],
                 'is_friend' => $user->isFriend($item['user_id'])
             );
 
@@ -1902,6 +1909,7 @@ class modelContent extends cmsModel{
             $item['user'] = array(
                 'id'       => $item['user_id'],
                 'nickname' => $item['user_nickname'],
+                'slug'     => $item['user_slug'],
                 'avatar'   => $item['user_avatar']
             );
 
@@ -1956,7 +1964,7 @@ class modelContent extends cmsModel{
             if(is_callable($access_callback) && !$access_callback($ctype)){
                 continue;
             }
-		
+
 	    if(!$ctype['options']['profile_on']){
                 continue;
             }

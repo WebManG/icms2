@@ -28,7 +28,7 @@ class actionAuthReset extends cmsAction {
                 if ($result['success']){
                     cmsUser::addSessionMessage(LANG_PASS_CHANGED, 'success');
                     $users_model->clearUserPassToken($profile['id']);
-                    $this->redirectTo('users', $profile['id']);
+                    $this->redirectTo('users', $profile['slug']);
                 } else {
                     $errors = $result['errors'];
                 }

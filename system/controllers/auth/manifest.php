@@ -2,6 +2,9 @@
 
     return array(
 
-        'hooks' => array( 'user_profile_update' )
+        'hooks' => array(
+            'user_before_register',
+            'user_profile_update'
+        )
 
     );

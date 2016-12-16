@@ -17,7 +17,7 @@ class actionUsersProfileFriends extends cmsAction {
 
         $this->model->filterFriends($profile['id']);
 
-        $page_url = href_to($this->name, $profile['id'], 'friends');
+        $page_url = href_to($this->name, $profile['slug'], 'friends');
         $profiles_list_html = $this->renderProfilesList($page_url);
 
         return $this->cms_template->render('profile_friends', array(

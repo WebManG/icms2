@@ -269,6 +269,7 @@ class modelComments extends cmsModel {
             $item['user'] = array(
                 'id'        => $item['user_id'],
                 'nickname'  => $item['user_nickname'],
+                'slug'      => $item['user_slug'],
                 'is_online' => cmsUser::userIsOnline($item['user_id']),
                 'avatar'    => $item['user_avatar']
             );
@@ -285,6 +286,7 @@ class modelComments extends cmsModel {
     public function getComment($id){
 
         $this->select('u.nickname', 'user_nickname');
+        $this->select('u.slug', 'user_slug');
         $this->select('u.avatar', 'user_avatar');
         $this->joinUserLeft();
 
@@ -293,6 +295,7 @@ class modelComments extends cmsModel {
             $item['user'] = array(
                 'id'        => $item['user_id'],
                 'nickname'  => $item['user_nickname'],
+                'slug'      => $item['user_slug'],
                 'is_online' => cmsUser::userIsOnline($item['user_id']),
                 'avatar'    => $item['user_avatar']
             );

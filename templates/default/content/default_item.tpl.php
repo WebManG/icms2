@@ -123,7 +123,7 @@
                 </div>
                 <?php if (!empty($item['folder_title'])){ ?>
                     <div class="bar_item bi_folder">
-                        <a href="<?php echo href_to('users', $item['user']['id'], array('content', $ctype['name'], $item['folder_id'])); ?>"><?php echo $item['folder_title']; ?></a>
+                        <a href="<?php echo href_to('users', $item['user']['slug'], array('content', $ctype['name'], $item['folder_id'])); ?>"><?php echo $item['folder_title']; ?></a>
                     </div>
                 <?php } ?>
             <?php } ?>

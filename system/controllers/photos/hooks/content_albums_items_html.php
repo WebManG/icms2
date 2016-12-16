@@ -23,7 +23,7 @@ class onPhotosContentAlbumsItemsHtml extends cmsAction {
         }
 
         $profile['url_params'] = array('photo_page' => 1);
-        $profile['base_url']   = href_to('users', $profile['id'], array('content', $ctype['name']));
+        $profile['base_url']   = href_to('users', $profile['slug'], array('content', $ctype['name']));
 
         return $this->renderPhotosList($profile, 'user_id', $this->cms_core->request->get('photo_page', 1));
 

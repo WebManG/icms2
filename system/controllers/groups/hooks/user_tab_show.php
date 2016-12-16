@@ -9,7 +9,7 @@ class onGroupsUserTabShow extends cmsAction {
 
         $this->model->filterByMember($profile['id']);
 
-        $page_url = href_to('users', $profile['id'], 'groups');
+        $page_url = href_to('users', $profile['slug'], 'groups');
 
         $list_html = $this->renderGroupsList($page_url, 'popular');
 

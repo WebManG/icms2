@@ -8,7 +8,13 @@ class actionAdminUsersFilter extends cmsAction {
 
         $ctype = $content_model->getContentTypeByName('users');
 
-        $fields  = $content_model->getContentFields('users');
+        $fields[] = array(
+            'title' => LANG_USER_PROFILE_SLUG,
+            'name' => 'slug',
+            'handler' => new fieldString('slug')
+        );
+
+        $fields = array_merge($fields, $content_model->getContentFields('users'));
 
         $fields[] = array(
             'title' => LANG_RATING,
