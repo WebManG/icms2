@@ -10,6 +10,7 @@
 	<title><?php $this->title(); ?></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/favicona.ico" type="image/x-icon">
     <?php $this->addMainCSS('templates/default/css/theme-modal.css'); ?>
     <?php $this->addMainCSS('templates/default/css/jquery-ui.css'); ?>
     <?php $this->addMainJS('templates/default/js/jquery.js'); ?>
@@ -40,7 +41,7 @@
                 </li>
             </ul>
             <ul id="right_links">
-                <li><a href="<?php echo href_to('users', $user->id); ?>" class="user"><?php echo html_avatar_image($user->avatar, 'micro'); ?><span><?php echo $user->nickname; ?></span></a></li>
+                <li><a href="<?php echo href_to('users', $user->slug); ?>" class="user"><?php echo html_avatar_image($user->avatar, 'micro'); ?><span><?php echo $user->nickname; ?></span></a></li>
                 <li><a href="<?php echo LANG_HELP_URL; ?>"><?php echo LANG_HELP; ?></a></li>
                 <li><a href="<?php echo href_to_home(); ?>"><?php echo LANG_CP_BACK_TO_SITE; ?></a></li>
                 <li><a href="<?php echo href_to('auth', 'logout'); ?>" class="logout"><?php echo LANG_LOG_OUT; ?></a></li>

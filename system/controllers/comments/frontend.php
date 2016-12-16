@@ -112,7 +112,7 @@ class comments extends cmsFrontend {
         $messenger->sendNoticeEmail('comments_new', array(
             'page_url'        => href_to_abs($comment['target_url']) . "#comment_{$comment['id']}",
             'page_title'      => $comment['target_title'],
-            'author_url'      => href_to_abs('users', $comment['user_id']),
+            'author_url'      => href_to_abs('users', $comment['user_slug']),
             'author_nickname' => $comment['user_nickname'],
             'comment'         => $comment['content']
         ));
@@ -133,7 +133,7 @@ class comments extends cmsFrontend {
 		$letter_data = array(
             'page_url' => $page_url,
             'page_title' => $comment['target_title'],
-            'author_url' => $is_guest_comment ? $page_url : href_to_abs('users', $comment['user_id']),
+            'author_url' => $is_guest_comment ? $page_url : href_to_abs('users', $comment['user_slug']),
             'author_nickname' => $is_guest_comment ? $comment['author_name'] : $comment['user_nickname'],
             'comment' => $comment['content'],
             'original' => $parent_comment['content'],
@@ -308,7 +308,7 @@ class comments extends cmsFrontend {
                     'comments_moderate',
                     array(
                         'author_nickname' => !$comment['user_id'] ? $comment['author_name'] : $comment['user_nickname'],
-                        'author_url' => !$comment['user_id'] ? $page_url : href_to_abs('users', $comment['user_id']),
+                        'author_url' => !$comment['user_id'] ? $page_url : href_to_abs('users', $comment['user_slug']),
                         'page_url'   => $page_url,
                         'comment'    => strip_tags($comment['content_html']),
                         'nickname'   => $moderator['nickname'],

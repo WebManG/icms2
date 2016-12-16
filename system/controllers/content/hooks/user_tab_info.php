@@ -12,7 +12,7 @@ class onContentUserTabInfo extends cmsAction {
 
         return array(
             'counter' => $this->content_counts[$tab_name]['count'],
-            'url' => href_to('users', $profile['id'], $tab_name),
+            'url' => href_to('users', $profile['slug'], $tab_name),
         );
 
     }

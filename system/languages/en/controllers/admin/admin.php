@@ -281,6 +281,7 @@
     define('LANG_CP_USER_NOT_FOUND',            'User %s not found');
     define('LANG_CP_USER_FIND_BYIP',            'Find all by this IP');
     define('LANG_CP_USER_RIPE_SEARCH',          'Find in RIPE database');
+    define('LANG_CP_USER_SLUG_HINT',            'The field will be replaced by user id if you leave it empty');
 
     define('LANG_CP_CONTROLLERS_OPTIONS',       'Component options');
     define('LANG_CP_CONTROLLERS_ADD',           'Install Component');

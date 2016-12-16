@@ -11,7 +11,7 @@ class onUsersMenuUsers extends cmsAction {
         if ($action == 'profile'){
 
             return array(
-                'url' => href_to($this->name, $user->id),
+                'url' => href_to($this->name, $user->slug),
                 'items' => false
             );
 
@@ -20,7 +20,7 @@ class onUsersMenuUsers extends cmsAction {
         if ($action == 'settings'){
 
             return array(
-                'url' => href_to($this->name, 'edit', array($user->id)),
+                'url' => href_to($this->name, 'edit', array($user->slug)),
                 'items' => false
             );
 

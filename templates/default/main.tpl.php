@@ -5,6 +5,7 @@
     <title><?php $this->title(); ?></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <?php $this->addMainCSS("templates/{$this->name}/css/theme-text.css"); ?>
     <?php $this->addMainCSS("templates/{$this->name}/css/theme-layout.css"); ?>
     <?php $this->addMainCSS("templates/{$this->name}/css/theme-gui.css"); ?>

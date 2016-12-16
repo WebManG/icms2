@@ -193,26 +193,34 @@ class cmsUser {
 
     /**
      * Авторизует пользователя
-     * @param string $email
+     * @param string $login
      * @param string $password
      * @param bool $remember
+     * @param string $auth_by  Имя поля для авторизации
      * @return int
      */
-    public static function login($email, $password, $remember=false) {
+    public static function login($login, $password, $remember=false, $auth_by=false) {
 
-        if (!preg_match("/^([a-z0-9\._-]+)@([a-z0-9\._-]+)\.([a-z]{2,6})$/i", $email)){
-            return 0;
+        // Логин должен быть не пустым
+        if (!$login)   { return 0; }
+
+        // Проверяем, передан ли email в качестве логина
+        if (preg_match("/^([a-z0-9\._-]+)@([a-z0-9\._-]+)\.([a-z]{2,6})$/i", $login)) {
+            $auth_by = 'email';
+        } else {
+            // Если не email, то должно быть указано имя поля для авторизации
+            if (!$auth_by) { return 0; }
         }
 
         $model = cmsCore::getModel('users');
 
-        $model->filterEqual('email', $email);
+        $model->filterEqual($auth_by, $login);
         $model->filterFunc('password', "MD5(CONCAT(MD5('{$password}'), i.password_salt))");
 
         $user = $model->getUser();
 
         if(!$user) {
-            $user = cmsEventsManager::hook('user_auth_error', array('email'=>$email,'password'=>$password));
+            $user = cmsEventsManager::hook('user_auth_error', array('login'=>$login,'password'=>$password,'auth_by'=>$auth_by));
         }
 
         if (empty($user['id'])) { return 0; }
@@ -221,6 +229,7 @@ class cmsUser {
 
         self::sessionSet('user', array(
             'id'        => $user['id'],
+            'slug'      => $user['slug'],
             'groups'    => $user['groups'],
             'time_zone' => $user['time_zone'],
             'perms'     => self::getPermissions($user['groups']),
@@ -229,8 +238,8 @@ class cmsUser {
 
         if ($remember){
 
-            $auth_token = string_random(32, $email);
-            self::setCookie('auth', $auth_token, AUTH_TOKEN_EXPIRATION_INT); //100 дней
+            $auth_token = string_random(32, $login);
+            self::setCookie('auth', $auth_token, AUTH_TOKEN_EXPIRATION_INT);
             $model->setAuthToken($user['id'], $auth_token);
             $model->deleteExpiredToken($user['id'], AUTH_TOKEN_EXPIRATION_INT);
 

@@ -28,8 +28,8 @@ class onUsersWallAfterAdd extends cmsAction {
         $messenger->addRecipient($profile_id);
 
         $messenger->sendNoticeEmail('wall_reply', array(
-            'profile_url'     => href_to_abs('users', $profile_id) . "?wid={$entry['id']}&reply=1",
-            'author_url'      => href_to_abs('users', $entry['user_id']),
+            'profile_url'     => href_to_abs('users', $entry['profile_slug']) . "?wid={$entry['id']}&reply=1",
+            'author_url'      => href_to_abs('users', $entry['user_slug']),
             'author_nickname' => $entry['user_nickname'],
             'content'         => $entry['content_html']
         ));

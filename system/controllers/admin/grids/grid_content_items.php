@@ -45,7 +45,7 @@ function grid_content_items($controller, $ctype_name=false){
         ),
         'user_nickname' => array(
             'title' => LANG_AUTHOR,
-            'href' => href_to('users', '{user_id}'),
+            'href' => href_to('users', '{user_slug}'),
             'order_by' => 'u.nickname',
         ),
     );

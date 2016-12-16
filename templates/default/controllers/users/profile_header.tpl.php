@@ -3,7 +3,7 @@
 <h1 id="user_profile_title">
 
     <div class="avatar">
-        <a href="<?php echo $this->href_to($profile['id']); ?>"><?php echo html_avatar_image($profile['avatar'], 'micro', $profile['nickname']); ?></a>
+        <a href="<?php echo $this->href_to($profile['slug']); ?>"><?php echo html_avatar_image($profile['avatar'], 'micro', $profile['nickname']); ?></a>
     </div>
 
     <div id="user_profile_rates" class="rates"
@@ -28,7 +28,7 @@
 
     <div class="name<?php if (!empty($profile['status'])){ ?> name_with_status<?php } ?>">
 
-        <a href="<?php echo $this->href_to($profile['id']); ?>"><?php html($profile['nickname']); ?></a>
+        <a href="<?php echo $this->href_to($profile['slug']); ?>"><?php html($profile['nickname']); ?></a>
         <?php if ($profile['is_locked']){ ?>
             <span class="is_locked"><?php echo LANG_USERS_LOCKED_NOTICE_PUBLIC; ?></span>
         <?php } ?>
@@ -44,9 +44,9 @@
                     <?php if ($this->controller->options['is_wall']){ ?>
                         <span class="reply">
                             <?php if (empty($profile['status']['replies_count'])) { ?>
-                                <a href="<?php echo $this->href_to($profile['id']) . "?wid={$profile['status']['wall_entry_id']}&reply=1"; ?>"><?php echo LANG_REPLY; ?></a>
+                                <a href="<?php echo $this->href_to($profile['slug']) . "?wid={$profile['status']['wall_entry_id']}&reply=1"; ?>"><?php echo LANG_REPLY; ?></a>
                             <?php } else { ?>
-                                <a href="<?php echo $this->href_to($profile['id']) . "?wid={$profile['status']['wall_entry_id']}"; ?>"><?php echo html_spellcount($profile['status']['replies_count'], LANG_REPLY_SPELLCOUNT); ?></a>
+                                <a href="<?php echo $this->href_to($profile['slug']) . "?wid={$profile['status']['wall_entry_id']}"; ?>"><?php echo html_spellcount($profile['status']['replies_count'], LANG_REPLY_SPELLCOUNT); ?></a>
                             <?php } ?>
                         </span>
                     <?php } ?>

@@ -19,13 +19,6 @@ class formAdminUser extends cmsForm {
                         )
                     )),
 
-                    new fieldString('nickname', array(
-                        'title' => LANG_NICKNAME,
-                        'rules' => array(
-                            array('required'),
-                        )
-                    )),
-
                     new fieldString('password1', array(
                         'title' => LANG_NEW_PASS,
                         'is_password' => true,

@@ -2160,3 +2160,9 @@ table.data_list .actions{
 		height:calc(100% - 214px);
     }
 }
+
+/* Registration form ================================================= */
+
+.hint .userurl {
+	color:blue;
+}

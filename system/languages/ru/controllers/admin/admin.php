@@ -282,6 +282,7 @@
     define('LANG_CP_USER_NOT_FOUND',            'Пользователь %s не найден');
     define('LANG_CP_USER_FIND_BYIP',            'Найти всех с таким ip');
     define('LANG_CP_USER_RIPE_SEARCH',          'Найти в базе RIPE');
+    define('LANG_CP_USER_SLUG_HINT',            'Если оставить пустым, то в это поле будет подставлен id пользователя');
 
     define('LANG_CP_CONTROLLERS_OPTIONS',       'Настройки компонента');
     define('LANG_CP_CONTROLLERS_ADD',           'Установить компонент');

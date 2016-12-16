@@ -4,10 +4,16 @@
 
     define('LANG_AUTHORIZATION',            'Авторизация');
 
+    define('LANG_AUTH_BY',                  'Авторизация по полю');
+
     define('LANG_AUTH_RESTRICTIONS',            'Ограничения и запреты');
     define('LANG_AUTH_RESTRICTED_EMAILS',       'Запрещенные адреса e-mail');
     define('LANG_AUTH_RESTRICTED_EMAILS_HINT',  'Один адрес на строке, можно использовать символ * для подстановки любого значения');
     define('LANG_AUTH_RESTRICTED_EMAIL',        'Использование e-mail адреса <b>%s</b> запрещено');
+
+    define('LANG_AUTH_RESTRICTED_SLUGS',        'Запрещенные слова в адресах пользовательских профилей');
+    define('LANG_AUTH_RESTRICTED_SLUGS_HINT',   'Одно слово на строке, можно использовать символ * для подстановки любого значения');
+    define('LANG_AUTH_RESTRICTED_SLUG',         'Использование значения <b>%s</b> запрещено');
 
     define('LANG_AUTH_RESTRICTED_NAMES',        'Запрещенные никнеймы');
     define('LANG_AUTH_RESTRICTED_NAMES_HINT',   'Один никнейм на строке, можно использовать символ * для подстановки любого значения');
@@ -53,6 +59,11 @@
     define('LANG_REG_CFG_VERIFY_LOCK_REASON',  'Требуется подтверждение адреса e-mail');
     define('LANG_REG_CFG_DEF_GROUP_ID',		   'Помещать новых пользователей в группы');
 
+    define('LANG_REG_CFG_REG_USER_SLUG',       'При регистрации запрашивать/подставлять в адреса пользовательских страниц');
+    define('LANG_REG_CFG_REG_USER_SLUG_SLUG',  'Адрес профиля (slug)');
+    define('LANG_REG_CFG_RULES_URL',           'Ссылка на "Правила сайта"');
+    define('LANG_REG_CFG_RULES_URL_HINT',      'Полный адрес или адрес от корня сайта со слешем "/" в начале. Если ссылка указана, то при регистрации пользователь должен будет согласиться с этими правилами.');
+
     define('LANG_REG_INCORRECT_EMAIL',       'Некорректный адрес электронной почты');
     define('LANG_REG_EMAIL_EXISTS',          'Указанный адрес электронной почты уже зарегистрирован');
     define('LANG_REG_PASS_NOT_EQUAL',        'Пароли не совпали');
@@ -66,3 +77,6 @@
     define('LANG_EMAIL_NOT_FOUND',           'Указанный E-mail не найден в нашей базе');
     define('LANG_TOKEN_SENDED',              'На указанный адрес E-mail отправлены инструкции по восстановлению пароля');
     define('LANG_RESTORE_NOTICE',            'Пожалуйста укажите адрес E-mail который вы вводили при регистрации.<br/>На указанный адрес будут высланы инструкции по восстановлению пароля.');
+
+    define('LANG_REG_RULES_SET',             'Согласие с "Правилами сайта"');
+    define('LANG_REG_RULES_AGREE',           'Я подтверждаю, что прочитал(-а) и принимаю "<a href="%s" target="_blank">Пользовательское соглашение</a>"');

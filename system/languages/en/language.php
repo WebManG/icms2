@@ -147,6 +147,7 @@
     define('LANG_PARSER_IN_FULLTEXT_SEARCH_HINT', 'Attention! Index will be rebuilt, once the option is changed. It can take a long time in respect of large tables.');
     define('LANG_PARSER_ADD_FROM_LINK', 'add by link');
     define('LANG_PARSER_ENTER_IMAGE_LINK', 'Enter image link');
+    define('LANG_PARSER_REGEXP',             'Regular expression');
     define('LANG_OR', 'or');
     define('LANG_BEGIN_TYPING', 'Start typing or select from the list');
 
@@ -197,6 +198,10 @@
     define('LANG_ONLINE',                    'Online');
     define('LANG_USERS_PROFILE_LAST_IP',     'Last IP');
     define('LANG_USERS_PROFILE_LOGDATE',     'Last visit');
+    define('LANG_USER_PROFILE_SLUG',         'Profile address');
+    define('LANG_USER_SLUG',                 'Beautiful name for the address of your pages');
+    define('LANG_USER_SLUG_HINT',            'Only uppercase or/and lowercase letters (at least one), numbers and underscores is allowed. Length 4-100 characters.');
+    define('LANG_USER_URL_HINT',             'Address of your page will be <strong>%s/<span id="userurl" class="userurl"></span></strong>');
 
     //MODERATION
     define('LANG_MODERATION',                'Moderation');
@@ -270,6 +275,7 @@
     define('ERR_VALIDATE_ALPHANUMERIC',      'Only letters and numbers');
     define('ERR_VALIDATE_SYSNAME',           'Only letters (lowercase), numbers and break characters');
     define('ERR_VALIDATE_SLUG',              'Only letters (lowercase), numbers, hyphen and vertical bar');
+    define('ERR_VALIDATE_USERSLUG',          'Only uppercase or/and lowercase letters (at least one), numbers and underscores');
     define('ERR_VALIDATE_DIGITS',            'Only numbers');
     define('ERR_VALIDATE_NUMBER',            'Enter a number');
     define('ERR_VALIDATE_UNIQUE',            'This value is already used');

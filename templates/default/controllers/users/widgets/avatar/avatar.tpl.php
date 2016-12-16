@@ -3,13 +3,13 @@
     <div class="user_info">
 
         <div class="avatar">
-            <a href="<?php echo href_to('users', $user->id); ?>">
+            <a href="<?php echo href_to('users', $user->slug); ?>">
                 <?php echo html_avatar_image($user->avatar, 'micro', $user->nickname); ?>
             </a>
         </div>
 
         <div class="name">
-            <a href="<?php echo href_to('users', $user->id); ?>">
+            <a href="<?php echo href_to('users', $user->slug); ?>">
                 <?php html($user->nickname); ?>
             </a>
         </div>

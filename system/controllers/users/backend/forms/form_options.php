@@ -41,6 +41,42 @@ class formUsersOptions extends cmsForm {
                 'title' => LANG_USERS_PROFILE,
                 'childs' => array(
 
+                    new fieldList('slug_edit', array(
+                        'title'   => LANG_USERS_OPT_SLUG_EDIT,
+                        'default' => 'forbidden',
+                        'items'   => array(
+                            'forbidden'  => LANG_USERS_OPT_SLUG_EDIT_FORBIDDEN,
+                            'oncefromid' => LANG_USERS_OPT_SLUG_EDIT_ONCEFROMID,
+                            'allowed'    => LANG_USERS_OPT_SLUG_EDIT_ALLOWED
+                        )
+                    )),
+
+                    new fieldList('slug_field', array(
+                        'title'   => LANG_USERS_OPT_SLUG_FIELD,
+                        'default' => 'slug',
+                        'generator'   => function() {
+
+                            $items = array(
+                                'slug'  => LANG_USERS_OPT_SLUG_FIELD_SLUG
+                            );
+
+                            // Получаем список пользовательских полей
+                            $users_fields = cmsCore::getModel('content')->
+                                setTablePrefix('')->
+                                getContentFields('{users}');
+
+                            // Добавляем в список уникальные поля
+                            foreach($users_fields as $field) {
+                                if ($field['options']['is_unique']) {
+                                    $items[$field['name']] = $field['title'].' ('.$field['name'].')';
+                                }
+                            }
+
+                            return $items;
+
+                        }
+                    )),
+
                     new fieldCheckbox('is_auth_only', array(
                         'title' => LANG_USERS_OPT_AUTH_ONLY,
                     )),

@@ -4,10 +4,16 @@
 
     define('LANG_AUTHORIZATION',            'Authorization');
 
+    define('LANG_AUTH_BY',                  'Authorization by field');
+
     define('LANG_AUTH_RESTRICTIONS',            'Restrictions');
     define('LANG_AUTH_RESTRICTED_EMAILS',       "Restricted e-mails");
     define('LANG_AUTH_RESTRICTED_EMAILS_HINT',  'One address per line, you can use * as a wildcard');
     define('LANG_AUTH_RESTRICTED_EMAIL',        'E-mail <b>%s</b> is forbidden');
+
+    define('LANG_AUTH_RESTRICTED_SLUGS',        'Restricted slugs in the profile addresses');
+    define('LANG_AUTH_RESTRICTED_SLUGS_HINT',   'One word per line, you can use * as a wildcard');
+    define('LANG_AUTH_RESTRICTED_SLUG',         'Address <b>%s</b> is forbidden');
 
     define('LANG_AUTH_RESTRICTED_NAMES',        'Restricted nicknames');
     define('LANG_AUTH_RESTRICTED_NAMES_HINT',   'One nickname per line, you can use * as a wildcard');
@@ -53,6 +59,11 @@
     define('LANG_REG_CFG_VERIFY_LOCK_REASON',  'E-mail verification required');
     define('LANG_REG_CFG_DEF_GROUP_ID',		   'Add new users to groups');
 
+    define('LANG_REG_CFG_REG_USER_SLUG',       'Request/substitute in the user URLs during registration');
+    define('LANG_REG_CFG_REG_USER_SLUG_SLUG',  'Profile address (slug)');
+    define('LANG_REG_CFG_RULES_URL',           'The link to the "Site rules"');
+    define('LANG_REG_CFG_RULES_URL_HINT',      'Full address or the address from the root of the site with a slash "/" at the beginning. If the link is specified then the user will have to accept these rules during registration.');
+
     define('LANG_REG_INCORRECT_EMAIL',       'E-mail address is incorrect');
     define('LANG_REG_EMAIL_EXISTS',          'This e-mail address is already registered');
     define('LANG_REG_PASS_NOT_EQUAL',        'Passwords do not match');
@@ -66,3 +77,6 @@
     define('LANG_EMAIL_NOT_FOUND',           'This e-mail not found in our database');
     define('LANG_TOKEN_SENDED',              'We sent you an e-mail with further instructions on password recovery');
     define('LANG_RESTORE_NOTICE',            'Please enter the e-mail address with which you registered.<br/>We will send you further instructions on password recovery.');
+
+    define('LANG_REG_RULES_SET',              'Acceptance of the "Site rules"');
+    define('LANG_REG_RULES_AGREE',            'I confirm that I have read and accept the "<a href="%s" target="_blank">User Agreement</a>"');
