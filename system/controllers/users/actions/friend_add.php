@@ -5,7 +5,7 @@ class actionUsersFriendAdd extends cmsAction {
     public function run($friend_id){
 
 		if (!cmsUser::isLogged()) { cmsCore::error404(); }
-		
+
         $user = cmsUser::getInstance();
 
         if (!$friend_id) { cmsCore::error404(); }
@@ -33,7 +33,7 @@ class actionUsersFriendAdd extends cmsAction {
 
                 $this->sendNoticeAccepted($friend);
 
-                $this->redirectToAction($friend_id);
+                $this->redirectToAction($friend->slug);
 
             }
 
@@ -55,7 +55,7 @@ class actionUsersFriendAdd extends cmsAction {
 
                 $this->sendNoticeRequest($friend);
 
-                $this->redirectToAction($friend_id);
+                $this->redirectToAction($friend->slug);
 
             } else {
 
