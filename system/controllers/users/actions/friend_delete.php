@@ -3,7 +3,7 @@
 class actionUsersFriendDelete extends cmsAction {
 
     public function run($friend_id){
-		
+
 		if (!cmsUser::isLogged()) { cmsCore::error404(); }
 
         $user = cmsUser::getInstance();
@@ -35,7 +35,7 @@ class actionUsersFriendDelete extends cmsAction {
 
                 $this->sendNoticeDeleted($friend);
 
-                $this->redirectToAction($friend_id);
+                $this->redirectToAction($friend->slug);
 
             } else {
 
