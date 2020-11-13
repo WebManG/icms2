@@ -22,6 +22,12 @@ function initAutocomplete (field, multiple, url, data, separator){
         $.getJSON(url, {
             term: term
         }, function(r, status, xhr) {
+            /* Окружаем span-ом искомую подстроку в строках выпадающего списка */
+            var i, label;
+            for (i = 0; i < r.length; i++) {
+                label = r[i]['label'];
+                r[i]['label'] = label.split(term).join('<span class="term">'+term+'</span>');
+            }
             cache[term] = r;
             response(r);
         });
@@ -95,7 +101,8 @@ function initAutocomplete (field, multiple, url, data, separator){
                 setCaretPosition('#'+field, position);
                 icms.events.run('autocomplete_select', ui);
                 return false;
-            }
+            },
+            open: highlightTerm
         });
     } else {
         $('#'+field).autocomplete({
@@ -111,7 +118,13 @@ function initAutocomplete (field, multiple, url, data, separator){
             },
             select: function( event, ui ) {
                 icms.events.run('autocomplete_select', ui);
-            }
+            },
+            open: highlightTerm
         });
     }
+    function highlightTerm() {
+        $('ul.ui-autocomplete.ui-front.ui-menu.ui-widget.ui-widget-content li').each( function( i, elem ) {
+            $(elem).html(elem.innerText );
+        });
+    };
 }
