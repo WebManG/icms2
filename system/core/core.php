@@ -750,6 +750,12 @@ class cmsCore {
      */
     public function runController(){
 
+        $debug_enabled = cmsConfig::getInstance()->debug;
+
+        if ($debug_enabled) {
+            $point_id = cmsDebugging::pointStart('system');
+        }
+
         $this->defineController();
 
         if (!preg_match('/^[a-z]{1}[a-z0-9_]*$/', $this->controller)){
@@ -777,6 +783,15 @@ class cmsCore {
 
         // запускаем действие
         $controller->runAction($this->uri_action, $this->uri_params);
+
+        if ($debug_enabled) {
+            cmsDebugging::pointProcess('system', array(
+                'info'       => 'Run controller \''.$controller->title.'\' -> /system/controllers/'.$controller->name,
+                'name'       => $controller->title,
+                'controller' => $controller->name,
+                'action'     => 'controller'
+            ), 0, $point_id);
+        }
 
     }
 
@@ -879,13 +894,7 @@ class cmsCore {
                     continue;
                 }
 
-                cmsDebugging::pointStart('widgets');
-
                 $this->runWidget($widget);
-
-                cmsDebugging::pointProcess('widgets', array(
-                    'data' => $widget['title'].' => /system/'.cmsCore::getWidgetPath($widget['name'], $widget['controller']).'/widget.php'
-                ), 0);
 
             }
 
@@ -914,6 +923,12 @@ class cmsCore {
 
     public function runWidget($widget){
 
+        $debug_enabled = cmsConfig::getInstance()->debug;
+
+        if ($debug_enabled) {
+            $point_id = cmsDebugging::pointStart('widgets');
+        }
+
         $result = false;
 
         $widget_object = cmsCore::getWidgetObject($widget);
@@ -940,14 +955,43 @@ class cmsCore {
             }
         }
 
-        if ($result === false) { return false; }
+        if ($result === false) {
+
+            if ($debug_enabled) {
+                cmsDebugging::pointProcess('widgets', array(
+                    'info'       => $widget['title'].' => /system/'.cmsCore::getWidgetPath($widget['name'], $widget['controller']).'/widget.php',
+                    'name'       => $widget['name'],
+                    'controller' => $widget['controller'],
+                    'data'       => $widget,
+                    'result'     => false,
+                    'error'      => 'Not rendered'
+                ), 0, $point_id);
+            }
+
+            return false;
+       }
 
         if (isset($result['_wd_template'])) { $widget_object->setTemplate($result['_wd_template']); }
         if (isset($result['_wd_title'])) { $widget_object->title = $result['_wd_title']; }
         if (isset($result['_wd_wrapper'])) { $widget_object->setWrapper($result['_wd_wrapper']); }
 
-        return cmsTemplate::getInstance()->renderWidget($widget_object, $result);
+        if ($debug_enabled) {
+            cmsDebugging::pointWork('widgets', $point_id);
+        }
 
+        $ret = cmsTemplate::getInstance()->renderWidget($widget_object, $result);
+
+        if ($debug_enabled) {
+            cmsDebugging::pointProcess('widgets', array(
+                'info'       => $widget['title'].' => /system/'.cmsCore::getWidgetPath($widget['name'], $widget['controller']).'/widget.php',
+                'name'       => $widget['name'],
+                'controller' => $widget['controller'],
+                'data'       => $widget,
+                'result'     => $result
+            ), 0, $point_id);
+        }
+
+        return $ret;
     }
 
     /**

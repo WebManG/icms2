@@ -16,9 +16,9 @@ $points_tab = cmsDebugging::getPointsTargets();
                 <?php foreach($data as $query) { ?>
                     <div class="query">
                         <div class="src"><?php echo $query['src']; ?></div>
-                        <?php if($query['data']){ ?>
-                            <div class="debug_data">
-                                <?php echo isset($query['data_callback']) ? $query['data_callback']($query['data']) : nl2br(htmlspecialchars($query['data'])); ?>
+                        <?php if($query['info']){ ?>
+                            <div class="debug_info">
+                                <?php echo isset($query['info_callback']) ? $query['info_callback']($query['info']) : nl2br(htmlspecialchars($query['info'])); ?>
                             </div>
                         <?php } ?>
                         <?php if($query['time']){ ?>

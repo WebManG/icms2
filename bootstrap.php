@@ -42,7 +42,8 @@ if(!$config->debug){
     error_reporting(E_ALL);
 
     // включаем отладку
-    cmsDebugging::enable();
+    if (isset($config->debug_mode)) { autoLoadCoreClass($config->debug_mode, true); }
+    cmsDebugging::enable($debug_start_data);
 
 }
 

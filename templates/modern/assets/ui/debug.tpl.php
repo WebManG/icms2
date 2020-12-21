@@ -32,9 +32,9 @@ $active_tab = false;
                         <div class="src text-muted small">
                             <?php echo $query['src']; ?>
                         </div>
-                        <?php if($query['data']){ ?>
-                            <div class="debug_data mt-2 p-2 bg-light">
-                                <?php echo isset($query['data_callback']) ? $query['data_callback']($query['data']) : nl2br(htmlspecialchars($query['data'])); ?>
+                        <?php if($query['info']){ ?>
+                            <div class="debug_info mt-2 p-2 bg-light">
+                                <?php echo isset($query['info_callback']) ? $query['info_callback']($query['info']) : nl2br(htmlspecialchars($query['info'])); ?>
                             </div>
                         <?php } ?>
                         <?php if($query['time']){ ?>

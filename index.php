@@ -10,6 +10,15 @@
  */
 
 /**
+ * Массив времени старта и начальной памяти системы для отладки
+ */
+$debug_start_data = array(
+    'time'        => microtime(true),
+    'memory'      => memory_get_usage(),
+    'memory_real' => memory_get_usage(true)
+);
+
+/**
  * Константа, по которой можно отследить текущий тип запуска CMS
  */
 define('VALID_RUN', true);

@@ -29,6 +29,12 @@ class cmsDatabase {
     private $mysqli;
 
     /**
+     * Значение поля AUTO_INCREMENT, которое было затронуто предыдущим запросом
+     * @var integer
+     */
+    private $insert_id;
+
+    /**
      * Время соединения с базой
      * @var integer
      */
@@ -119,7 +125,7 @@ class cmsDatabase {
     private function connect() {
 
         if (!empty($this->options['debug'])){
-            cmsDebugging::pointStart('db');
+            $point_id = cmsDebugging::pointStart('db');
         }
 
         mysqli_report(MYSQLI_REPORT_STRICT);
@@ -147,8 +153,14 @@ class cmsDatabase {
 
         if (!empty($this->options['debug'])){
             cmsDebugging::pointProcess('db', array(
-                'data' => 'Database connection'
-            ), 3);
+                'info'   => 'Database connection',
+                'action' => 'connect',
+                'data'   => array(
+                    'db_host' => $this->options['db_host'],
+                    'db_base' => $this->options['db_base'],
+                    'db_user' => $this->options['db_user']
+                )
+            ), 3, $point_id);
         }
 
         $this->setTimezone();
@@ -285,7 +297,7 @@ class cmsDatabase {
         }
 
         if (!empty($this->options['debug'])){
-            cmsDebugging::pointStart('db');
+            $point_id = cmsDebugging::pointStart('db');
         }
 
         $sql = $this->replacePrefix($sql);
@@ -312,10 +324,21 @@ class cmsDatabase {
 
         $result = $this->mysqli->query($sql);
 
+        $this->insert_id = $this->mysqli->insert_id;
+
         if (!empty($this->options['debug'])){
+
             cmsDebugging::pointProcess('db', array(
-                'data' => $sql
-            ));
+                'info'   => $sql,
+                'action' => 'query',
+                'data'   => array(
+                    'affected_rows' => $this->mysqli->affected_rows,
+                    'info'          => $this->mysqli->info,
+                    'warnings'      => ( $this->mysqli->warning_count ? $this->mysqli->get_warnings() : '')
+                ),
+                'result' => $result,
+                'error'  => ( $this->mysqli->errno ? ['errno' => $this->mysqli->errno, 'errmsg' => $this->mysqli->error] : '' ),
+            ), 2, $point_id);
         }
 
 		if(!$this->mysqli->errno) { return $result; }
@@ -373,7 +396,7 @@ class cmsDatabase {
 	 * @return integer
 	 */
 	public function lastId(){
-		return $this->mysqli->insert_id;
+		return $this->insert_id;
 	}
 
     /**

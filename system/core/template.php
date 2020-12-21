@@ -224,6 +224,10 @@ class cmsTemplate {
 
         $this->site_config = cmsConfig::getInstance();
 
+        if ($this->site_config->debug) {
+            $point_id = cmsDebugging::pointStart('system');
+        }
+
         if ($name) {
             $this->setName($name);
         } else {
@@ -259,6 +263,15 @@ class cmsTemplate {
         if (!$is_no_def_meta) {
             $this->metakeys = $this->site_config->metakeys;
             $this->metadesc = $this->site_config->metadesc;
+        }
+
+        if ($this->site_config->debug) {
+            cmsDebugging::pointProcess('system', array(
+                'info'       => 'Template initialization -> /templates/'.$this->name.'/'.$this->layout.'.tpl.php',
+                'name'       => $this->layout,
+                'controller' => $this->name,
+                'action'     => 'template'
+            ), 0, $point_id);
         }
     }
 
@@ -2968,9 +2981,13 @@ class cmsTemplate {
      */
     public function renderPage(){
 
-        $core = cmsCore::getInstance();
-
         $config = $this->site_config;
+
+        if ($config->debug) {
+            $point_id = cmsDebugging::pointStart('system');
+        }
+
+        $core = cmsCore::getInstance();
 
         $layout = $this->getLayout();
 
@@ -3003,6 +3020,15 @@ class cmsTemplate {
 
         } else {
             cmsCore::error(ERR_TEMPLATE_NOT_FOUND. ': '. $this->name.':'.$layout);
+        }
+
+        if ($config->debug) {
+            cmsDebugging::pointProcess('system', array(
+                'info'       => 'Page rendering -> /templates/'.$this->name.'/'.$layout.'.tpl.php',
+                'name'       => $layout,
+                'controller' => $this->name,
+                'action'     => 'rendering'
+            ), 0, $point_id);
         }
 
     }

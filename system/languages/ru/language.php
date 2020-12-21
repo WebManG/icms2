@@ -686,6 +686,6 @@
     define('LANG_DEBUG_TAB_DB',              'SQL');
     define('LANG_DEBUG_TAB_CACHE',           'Кэш');
     define('LANG_DEBUG_TAB_EVENTS_EMPTY',    'Неактивные события');
-    define('LANG_DEBUG_TAB_EVENTS',          'Отработавшие события');
+    define('LANG_DEBUG_TAB_HOOKS',           'Отработавшие события');
     define('LANG_DEBUG_TAB_WIDGETS',         'Виджеты');
     define('LANG_DEBUG_TAB_INCLUDES',        'Подключенные файлы');

@@ -36,15 +36,26 @@ class cmsEventsManager {
 
         }
 
+        $debug_enabled = cmsConfig::getInstance()->debug;
+
+        if ($debug_enabled) {
+            $event_id = cmsDebugging::pointStart('events');
+        }
+
         //получаем все активные контроллеры, привязанные к указанному событию
         $listeners = self::getEventListeners($event_name);
 
         //если активных контроллеров нет, возвращаем данные без изменений
         if (!$listeners) {
 
-            cmsDebugging::pointProcess('events_empty', array(
-                'data' => 'hook => '.$event_name
-            ), 1);
+            if ($debug_enabled) {
+                cmsDebugging::pointProcess('events_empty', array(
+                    'info'   => 'hook => '.$event_name,
+                    'name'   => $event_name,
+                    'action' => 'hook',
+                    'data'   => $data
+                ), 1, $event_id);
+            }
 
             return is_null($default_return) ? $data : $default_return;
 
@@ -61,14 +72,33 @@ class cmsEventsManager {
                 unset($controller); continue;
             }
 
-            cmsDebugging::pointStart('events');
+            if ($debug_enabled) {
+                $point_id = cmsDebugging::pointStart('hooks');
+                $dbg_data = $data;
+            }
 
-                $data = $controller->runHook($event_name, array($data));
+            $data = $controller->runHook($event_name, array($data));
 
+            if ($debug_enabled) {
+                cmsDebugging::pointProcess('hooks', array(
+                    'info'       => 'hook :: '.$listener.' => '.$event_name,
+                    'name'       => $event_name,
+                    'controller' => $listener,
+                    'action'     => 'hook',
+                    'data'       => $dbg_data,
+                    'result'     => $data
+                ), 1, $point_id);
+            }
+
+        }
+
+        if ($debug_enabled) {
             cmsDebugging::pointProcess('events', array(
-                'data' => 'hook :: '.$listener.' => '.$event_name
-            ), 1);
-
+                'info'   => 'event :: '.$event_name,
+                'name'   => $event_name,
+                'action' => 'hook',
+                'data'   => $data
+            ), 1, $event_id);
         }
 
         return $data;
@@ -88,15 +118,26 @@ class cmsEventsManager {
      */
     public static function hookAll($event_name, $data = false, $default_return = null, $_request = false){
 
+        $debug_enabled = cmsConfig::getInstance()->debug;
+
+        if ($debug_enabled) {
+            $event_id = cmsDebugging::pointStart('events');
+        }
+
         //получаем все активные контроллеры, привязанные к указанному событию
         $listeners = self::getEventListeners($event_name);
 
         //если активных контроллеров нет, возвращаем данные без изменений
         if (!$listeners) {
 
-            cmsDebugging::pointProcess('events_empty', array(
-                'data' => 'hookAll => '.$event_name
-            ), 1);
+            if ($debug_enabled) {
+                cmsDebugging::pointProcess('events_empty', array(
+                    'info'   => 'hookAll => '.$event_name,
+                    'name'   => $event_name,
+                    'action' => 'hookAll',
+                    'data'   => $data
+                ), 1, $event_id);
+            }
 
             return is_null($default_return) ? false : $default_return;
 
@@ -117,18 +158,36 @@ class cmsEventsManager {
                 unset($controller); continue;
             }
 
-            cmsDebugging::pointStart('events');
+            if ($debug_enabled) {
+                $point_id = cmsDebugging::pointStart('hooks');
+            }
 
-                $result = $controller->runHook($event_name, array($data));
+            $result = $controller->runHook($event_name, array($data));
 
-                if ($result !== false){
-                    $results[$listener] = $result;
-                }
+            if ($result !== false){
+                $results[$listener] = $result;
+            }
 
+            if ($debug_enabled) {
+                cmsDebugging::pointProcess('hooks', array(
+                    'info'       => 'hookAll :: '.$listener.' => '.$event_name,
+                    'name'       => $event_name,
+                    'controller' => $listener,
+                    'action'     => 'hookAll',
+                    'data'       => $data,
+                    'result'     => $result
+                ), 1, $point_id);
+            }
+
+        }
+
+        if ($debug_enabled) {
             cmsDebugging::pointProcess('events', array(
-                'data' => 'hookAll :: '.$listener.' => '.$event_name
-            ), 1);
-
+                'info'   => 'event :: '.$event_name,
+                'name'   => $event_name,
+                'action' => 'hookAll',
+                'data'   => $data
+            ), 1, $event_id);
         }
 
         return $results;

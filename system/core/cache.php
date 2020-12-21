@@ -59,23 +59,64 @@ class cmsCache {
 
     private function _set($key, $value, $ttl=false){
 
+        $debug_enabled = cmsConfig::getInstance()->debug;
+
+        if ($debug_enabled) {
+            $point_id = cmsDebugging::pointStart('cache');
+        }
+
         if (!$ttl) { $ttl = $this->cache_ttl; }
 
-        return $this->cacher->set($key, $value, $ttl);
+        $result = $this->cacher->set($key, $value, $ttl);
+
+        if ($debug_enabled) {
+            cmsDebugging::pointProcess('cache', array(
+                'info'   => 'set => '.$key,
+                'name'   => $key,
+                'action' => 'set',
+                'data'   => $value,
+                'result' => $result
+            ), 5, $point_id);
+        }
+
+        return $result;
 
     }
 
     private function _get($key){
 
-        if (!$this->cacher->has($key)){ return false; }
+        $debug_enabled = cmsConfig::getInstance()->debug;
 
-        cmsDebugging::pointStart('cache');
+        if ($debug_enabled) {
+            $point_id = cmsDebugging::pointStart('cache');
+        }
 
-            $value = $this->cacher->get($key);
+        if (!$this->cacher->has($key)) {
 
-        cmsDebugging::pointProcess('cache', array(
-            'data' => $key
-        ), 5);
+            if ($debug_enabled) {
+                cmsDebugging::pointProcess('cache', array(
+                    'info'   => 'get => Key \''.$key.'\' not found',
+                    'name'   => $key,
+                    'action' => 'get',
+                    'result' => false,
+                    'error'  => 'Key not found'
+                ), 5, $point_id);
+            }
+
+            return false;
+
+        }
+
+        $value = $this->cacher->get($key);
+
+        if ($debug_enabled) {
+            cmsDebugging::pointProcess('cache', array(
+                'info'   => 'get => '.$key,
+                'name'   => $key,
+                'action' => 'get',
+                'result' => $value
+            ), 5, $point_id);
+        }
 
         return $value;
 

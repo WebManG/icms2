@@ -688,6 +688,6 @@
     define('LANG_DEBUG_TAB_DB',              'SQL');
     define('LANG_DEBUG_TAB_CACHE',           'Cache');
     define('LANG_DEBUG_TAB_EVENTS_EMPTY',    'Inactive events');
-    define('LANG_DEBUG_TAB_EVENTS',          'Spent events');
+    define('LANG_DEBUG_TAB_HOOKS',           'Spent events');
     define('LANG_DEBUG_TAB_WIDGETS',         'Widgets');
     define('LANG_DEBUG_TAB_INCLUDES',        'Included files');
