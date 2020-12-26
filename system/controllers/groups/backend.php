@@ -37,14 +37,7 @@ class backendGroups extends cmsBackend {
     }
 
     public function validate_unique_field($value){
-
-        if (empty($value)) { return true; }
-        if (!in_array(gettype($value), array('integer','string'))) { return ERR_VALIDATE_INVALID; }
-
-        $result = $this->cms_core->db->isFieldExists('groups', $value);
-        if ($result) { return ERR_VALIDATE_UNIQUE_FIELD; }
-
-        return true;
+        return !$this->cms_core->db->isFieldExists('groups', $value);
     }
 
     public function getMetaItemFields() {

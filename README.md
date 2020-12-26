@@ -27,9 +27,11 @@
 Try it out for yourself in our [online demo](https://demo.instantcms.ru/)
 
 ## Requirements ##
-* PHP 5.5+ (PHP 7, PHP 8 supported too)
+* PHP 5.5+ (PHP 7 supported too)
+* PHP register_globals off
+* PHP magic_quotes_gpc off
 * GD, iconv, mbstring, simplexml, json and filter PHP extension
-* Mysql 5.0 or above, MariaDB and its support in PHP
+* Mysql 5.0 or above and its support in PHP
 * Apache + mod_rewrite + (MultiViews option disabled)
 
 ## Install InstantCMS ##

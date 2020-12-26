@@ -10,7 +10,6 @@ class fieldList extends cmsFormField {
     public $native_tag  = false;
     public $dynamic_list = false;
     public $show_empty_value = true;
-    public $disable_array_key_rules = false;
 
     public function getOptions(){
         return array(
@@ -60,10 +59,6 @@ class fieldList extends cmsFormField {
     }
 
     public function getRules() {
-
-        if($this->disable_array_key_rules){
-            return $this->rules;
-        }
 
         if(!$this->dynamic_list){
             $this->rules[] = ['array_key', $this->getListItems()];

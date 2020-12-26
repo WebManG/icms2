@@ -173,20 +173,11 @@ class actionAdminSettings extends cmsAction {
 
         }
 
-        $templates_has_options = [];
+        $templates_has_options = array();
 
         $tpls = cmsCore::getTemplates();
         foreach ($tpls as $tpl) {
-            $template_path = $this->cms_config->root_path . cmsTemplate::TEMPLATE_BASE_PATH. $tpl;
-            $manifest = cmsTemplate::getTemplateManifest($template_path);
-            if($manifest !== null){
-                if (!empty($manifest['properties']['has_options'])) {
-                    $templates_has_options[] = $tpl;
-                }
-                continue;
-            }
-            // Совместимость
-            if(file_exists($template_path.'/options.form.php')){
+            if(file_exists($this->cms_config->root_path.cmsTemplate::TEMPLATE_BASE_PATH.$tpl.'/options.form.php')){
                 $templates_has_options[] = $tpl;
             }
         }

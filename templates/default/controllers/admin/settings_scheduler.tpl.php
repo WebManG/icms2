@@ -27,8 +27,6 @@
     <?php $this->menu('settings', true, 'nav-pills'); ?>
 </div>
 
-<?php $this->renderGrid($this->href_to('settings', array('scheduler', 'ajax')), $grid); ?>
+<?php
 
-<div class="buttons">
-    <?php echo html_button(LANG_SAVE_ORDER, 'save_button', "icms.datagrid.submit('".href_to('admin', 'reorder', ['scheduler_tasks'])."')"); ?>
-</div>
+    $this->renderGrid($this->href_to('settings', array('scheduler', 'ajax')), $grid);

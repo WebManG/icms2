@@ -9,16 +9,7 @@ class modelAdmin extends cmsModel{
     public function getInstalledControllers(){
 
         if(!$this->order_by){
-            $this->orderByList([
-                [
-                    'by' => 'is_enabled',
-                    'to' => 'desc'
-                ],
-                [
-                    'by' => 'title',
-                    'to' => 'asc'
-                ]
-            ]);
+            $this->orderBy('title', 'asc');
         }
 
         return $this->get('controllers', function($item, $model){

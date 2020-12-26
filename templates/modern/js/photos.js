@@ -40,7 +40,6 @@ icms.photos = (function ($) {
         $('#bubble input').on('click', function (){
             $('a.process_download').attr('href', $(this).val());
         });
-        $('#bubble input:checked').triggerHandler('click');
 
         this.big_img = $('#photo_container').data('full-size-img');
         this.page_url = $('#photo_container img').data('page-url');

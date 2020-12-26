@@ -22,8 +22,7 @@ class actionAdminWidgetsRowDelete extends cmsAction {
         if($items){
             foreach ($items as $item) {
 
-                $this->model_widgets->filterEqual('template', $row['template'])->
-                        deleteWidgetPageBind($item['name'], 'position');
+                $this->model_widgets->deleteWidgetPageBind($item['name'], 'position');
 
                 // ищем вложенные ряды
                 $ns_items = $this->model_widgets->filterEqual('parent_id', $item['id'])->get('layout_rows');

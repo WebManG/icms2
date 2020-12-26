@@ -23,8 +23,9 @@
 
 ## Cистемные требования ##
 * Интерпретатор PHP версии 5.5 или выше;
+* Опции PHP register_globals и magic_quotes_gpc должны быть выключены;
 * Модули для PHP: GD, iconv, mbstring, simplexml, json, filter;
-* СУБД MySQL версии 5 или выше, MariaDB;
+* СУБД MySQL версии 5 или выше;
 * Веб-сервер Apache с установленным модулем mod_rewrite.
 
 ## Как установить InstantCMS ##

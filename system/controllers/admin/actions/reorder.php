@@ -2,16 +2,20 @@
 
 class actionAdminReorder extends cmsAction {
 
-    public function run($table_name) {
+    public function run($table_name){
 
-        if (!$this->model->db->isTableExists($table_name)) {
-            return $this->cms_template->renderJSON([
-                'error' => true
-            ]);
+        if (!$this->request->isAjax()){
+            return cmsCore::error404();
         }
 
+		if (!$this->model->db->isTableExists($table_name)){
+			return $this->cms_template->renderJSON(array(
+				'error' => true
+			));
+		}
+
         $items = $this->request->get('items', []);
-        if (!$items) { return cmsCore::error404(); }
+        if (!$items){ cmsCore::error404(); }
 
         $this->model->reorderByList($table_name, $items);
 
@@ -19,16 +23,11 @@ class actionAdminReorder extends cmsAction {
 
         cmsCache::getInstance()->clean(implode('.', $cache_keys));
 
-        if ($this->request->isAjax()) {
-            return $this->cms_template->renderJSON([
-                'error'        => false,
-                'success_text' => LANG_CP_ORDER_SUCCESS
-            ]);
-        }
+        return $this->cms_template->renderJSON(array(
+            'error' => false,
+            'success_text' => LANG_CP_ORDER_SUCCESS
+        ));
 
-        cmsUser::addSessionMessage(LANG_CP_ORDER_SUCCESS, 'success');
-
-        $this->redirectBack();
     }
 
 }

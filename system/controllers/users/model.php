@@ -145,30 +145,24 @@ class modelUsers extends cmsModel {
 //============================================================================//
 //============================================================================//
 
-    public function getUser($id = false, $join_inviter = false) {
+    public function getUser($id = false) {
 
         if($id){
             $this->useCache('users.user.'.$id);
         }
 
-        if($join_inviter){
-            $this->joinUser('inviter_id', [
-                'u.nickname'   => 'inviter_nickname',
-                'u.slug'       => 'inviter_slug',
-                'u.is_deleted' => 'inviter_is_deleted',
-                'u.avatar'     => 'inviter_avatar'
-            ], 'left');
-        }
+        $this->joinUser('inviter_id', [
+            'u.nickname'   => 'inviter_nickname',
+            'u.slug'       => 'inviter_slug',
+            'u.is_deleted' => 'inviter_is_deleted',
+            'u.avatar'     => 'inviter_avatar'
+        ], 'left');
 
         $this->joinSessionsOnline('i');
 
         if ($id){
             $user = $this->getItemById('{users}', $id);
         } else {
-            // На случай, если по ошибке запросят без предварительного фильтра
-            if (!$this->where){
-                return false;
-            }
             $user = $this->getItem('{users}');
         }
 
@@ -181,7 +175,7 @@ class modelUsers extends cmsModel {
         $user['privacy_options'] = cmsModel::yamlToArray($user['privacy_options']);
         $user['ctype_name']      = 'users';
         $user['inviter'] = [];
-        if (!empty($user['inviter_nickname'])) {
+        if ($user['inviter_id']) {
             $user['inviter'] = [
                 'nickname'   => $user['inviter_nickname'],
                 'slug'       => $user['inviter_slug'],
@@ -197,7 +191,7 @@ class modelUsers extends cmsModel {
 
         if(!$slug){ return false; }
 
-        return $this->filterEqual('slug', $slug)->getUser(false, true);
+        return $this->filterEqual('slug', $slug)->getUser();
     }
 
     public function getUserByEmail($email){
@@ -625,6 +619,18 @@ class modelUsers extends cmsModel {
         }
 
         cmsCache::getInstance()->clean("users.list");
+
+    }
+
+//============================================================================//
+//============================================================================//
+
+    public function isAvatarsEqual($old, $new){
+
+        if (!is_array($old)){ $old = cmsModel::yamlToArray($old); }
+        if (!is_array($new)){ $new = cmsModel::yamlToArray($new); }
+
+        return $old == $new;
 
     }
 

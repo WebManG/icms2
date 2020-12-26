@@ -4,18 +4,10 @@ class onBootstrap4WidgetMenuForm extends cmsAction {
 
 	public function run($_data){
 
-        list($form, $widget, $widget_object, $template_name) = $_data;
+        list($form, $widget, $widget_object, $template) = $_data;
 
-        $template = new cmsTemplate($template_name);
-
-        $manifest = $template->getManifest();
-
-        if(empty($manifest['properties']['vendor'])){
-            return $_data;
-        }
-
-        // Нам нужны только шаблоны на bootstrap4
-        if($manifest['properties']['vendor'] !== 'bootstrap4'){
+        // Нам нужен только шаблон modern
+        if($template !== 'modern'){
             return $_data;
         }
 
@@ -142,7 +134,7 @@ class onBootstrap4WidgetMenuForm extends cmsAction {
             'visible_depend' => ['options:menu_type' => ['show' => ['nav']]]
         )));
 
-        return [$form, $widget, $widget_object, $template_name];
+        return [$form, $widget, $widget_object, $template];
     }
 
 }

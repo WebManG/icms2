@@ -25,10 +25,6 @@
     height: 1.5rem;
     margin: -0.75rem;
 }
-.ft_html .value img, p img {
-    max-width: 100%;
-    height: auto;
-}
 @-webkit-keyframes loader-button{
     100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}
 }
@@ -200,7 +196,7 @@ thead.list_thead {
         margin: 0 0 0 1.5rem !important;
     }
     .sidebar-lg-show .fixed_toolbar {
-        left: 210px;
+        left: 200px;
     }
     .sidebar-lg-show.sidebar-minimized .fixed_toolbar {
         left: 50px;
@@ -681,17 +677,6 @@ form .child_field{margin-left: 20px}
     margin-bottom: 0.5rem;
     transition:border-color .2s ease, background 0.1s linear;
     overflow: hidden;
-    position: relative;
-}
-#cp-widgets-layout .position li.is_set_access::before {
-    content: '';
-    background-image: linear-gradient(45deg,rgba(255,255,255,.5) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.5) 50%,rgba(255,255,255,.5) 75%,transparent 75%,transparent);
-    position: absolute;
-    width: 100%;
-    top: 0;
-    left: 0;
-    height: 100%;
-    background-size: 40px 40px;
 }
 #cp-widgets-layout .widgets-layout-scheme-col .position li {
     margin-bottom: 0.25rem;
@@ -704,7 +689,6 @@ form .child_field{margin-left: 20px}
 #cp-widgets-list li > .title, #cp-widgets-layout .position li > .title {
     display: inline-block;
     padding: .5rem;
-    position: relative;
 }
 #cp-widgets-layout .position li:not(.disabled) > .title, #cp-widgets-list li > .title {
     cursor: move;
@@ -750,7 +734,6 @@ form .child_field{margin-left: 20px}
     color: inherit;
     transition: .3s;
     display: inline-block;
-    position: relative;
 }
 #cp-widgets-layout li .actions > a:hover, #cp-widgets-list li .actions > a:hover {
     transform: scale(1.3);
@@ -766,9 +749,6 @@ form .child_field{margin-left: 20px}
     max-width: 200px;
     border-radius: inherit;
     display: block;
-}
-#cp-widgets-layout .position li > img {
-    max-width: 100% !important;
 }
 #site_settings #fset_2 .chosen-container,
 #site_settings #fset_5 .chosen-container { width:300px !important; }
@@ -834,9 +814,6 @@ th[rel="is_enabled"] {
 th[rel="dg_actions"] {
     width: 70px;
 }
-th.sortable {
-    cursor: pointer;
-}
 .datagrid_loading{
     position: absolute;
     top: 0;
@@ -861,7 +838,7 @@ th.sortable {
 .datagrid .empty{
     color:#8f9ba6;
 }
-.datagrid.table-dragged tbody > tr:not(.filter) > td.dragged_handle::before,
+.datagrid.table-dragged tbody > tr:not(.filter) > td:first-child::before,
 .is-sortable .card-header > .db-sortable-handle::before,
 .layout-col-title > span::before,
 .widgets-layout-scheme:not(.disable-sortable) > .layout-row-title > .cell > span::before {
@@ -884,13 +861,12 @@ th.sortable {
 .widgets-layout-scheme:not(.disable-sortable) > .layout-row-title > .cell > span::before {
     top: 50%;
     margin-top: -10px;
-    left: -20px;
 }
 .layout-col-title > span::before {
     top: 0.05rem;
     left: -19px;
 }
-.datagrid.table-dragged tbody > tr:hover > td.dragged_handle::before, .is-sortable .card-header:hover > .db-sortable-handle::before, .widgets-layout-scheme:not(.disable-sortable) > .layout-row-title:hover > .cell > span::before, .layout-col-title:hover > span::before {
+.datagrid.table-dragged tbody > tr:hover > td:first-child::before, .is-sortable .card-header:hover > .db-sortable-handle::before, .widgets-layout-scheme:not(.disable-sortable) > .layout-row-title:hover > .cell > span::before, .layout-col-title:hover > span::before {
     opacity: 1;
 }
 .is-sortable .card-header > .db-sortable-handle::before {
@@ -899,7 +875,7 @@ th.sortable {
 .card-body > .card-footer {
     margin: 1.25rem -1.25rem -1.25rem -1.25rem;
 }
-.is-sortable .card-header > .db-sortable-handle, .datagrid.table-dragged tbody > tr:not(.filter) > td.dragged_handle {
+.is-sortable .card-header > .db-sortable-handle, .datagrid.table-dragged tbody > tr:not(.filter) > td:first-child {
     cursor: move;
 }
 .is-sortable .card-header > .db-sortable-handle {
@@ -907,7 +883,7 @@ th.sortable {
     margin: -0.75rem -1.25rem;
     padding: 0.75rem 1.25rem;
 }
-.datagrid.table-dragged tbody > tr > td.dragged_handle, .is-sortable .card-header > .db-sortable-handle {
+.datagrid.table-dragged tbody > tr > td:first-child, .is-sortable .card-header > .db-sortable-handle {
     position: relative;
 }
 .loading{
@@ -1149,7 +1125,6 @@ td > .spinner > div {
 
 .animate-shake {
   animation-name: shake;
-  z-index: 1;
 }
 .icms-svg-icon.w-16 {
     width: 1em;

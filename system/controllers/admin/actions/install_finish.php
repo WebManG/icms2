@@ -308,11 +308,6 @@ class actionAdminInstallFinish extends cmsAction {
 
     private function otherInstall($manifest) {
 
-        // Переходная проверка, был баг с определением системного пакета
-        if(!empty($manifest['install']['type']) && $manifest['install']['type'] == 'system'){
-            return '';
-        }
-
         $count_installed_before = $this->count_installed_before;
 
         $this->loadInstalledCounts();
@@ -348,6 +343,7 @@ class actionAdminInstallFinish extends cmsAction {
         }
 
         return '';
+
     }
 
     private function systemInstall($manifest) {

@@ -22,13 +22,13 @@ class photos extends cmsFrontend {
 
     }
 
-    public function getRowHeight($preset_options_name = 'preset_small') {
+    public function getRowHeight() {
 
         if(isset(self::$row_height)){ return self::$row_height; }
 
 		$preset_small = array('width' => 160, 'height'=>160);
-		if (!empty($this->options[$preset_options_name])){
-			$preset_small = cmsCore::getModel('images')->getPresetByName($this->options[$preset_options_name]);
+		if (!empty($this->options['preset_small'])){
+			$preset_small = cmsCore::getModel('images')->getPresetByName($this->options['preset_small']);
 		}
 
         self::$row_height = ($preset_small['height'] ? $preset_small['height'] : $preset_small['width']);

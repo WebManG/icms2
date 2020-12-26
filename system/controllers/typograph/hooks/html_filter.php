@@ -58,7 +58,7 @@ class onTypographHtmlFilter extends cmsAction {
             'ul', 'ol', 'li',
             'table', 'tbody', 'thead', 'tfoot', 'tr', 'td', 'th',
             'h1','h2','h3','h4','h5','h6',
-            'pre', 'code', 'blockquote', 'picture',
+            'pre', 'code', 'blockquote',
             'video', 'source', 'audio', 'youtube', 'facebook', 'figure', 'figcaption',
             'object', 'param', 'embed', 'iframe', 'spoiler'
         ));
@@ -106,8 +106,7 @@ class onTypographHtmlFilter extends cmsAction {
         $jevix->cfgAllowTagParams('h4', array('id' => '#text', 'class' => '#text'));
         $jevix->cfgAllowTagParams('h5', array('id' => '#text', 'class' => '#text'));
         $jevix->cfgAllowTagParams('video', array('controls' => '#text', 'class' => '#text', 'width' => '#int', 'height' => '#int'));
-        $jevix->cfgAllowTagParams('audio', array('controls' => '#text', 'class' => '#text', 'src' => '#text', 'autoplay' => '#text', 'preload' => '#text'));
-        $jevix->cfgAllowTagParams('source', array('src' => '#text', 'type' => '#text', 'media' => '#text'));
+        $jevix->cfgAllowTagParams('source', array('src' => '#text', 'type' => '#text'));
 
         // Устанавливаем параметры тегов являющиеся обязательными. Без них вырезает тег оставляя содержимое.
         $jevix->cfgSetTagParamsRequired('img', 'src');
@@ -280,7 +279,7 @@ class onTypographHtmlFilter extends cmsAction {
     }
 
     private function getVideoCode($src) {
-        return '<div class="video_wrap embed-responsive embed-responsive-16by9"><iframe class="video_frame embed-responsive-item" src="'.$src.'" frameborder="0" allowfullscreen></iframe></div>';
+        return '<div class="video_wrap"><iframe class="video_frame" src="'.$src.'" frameborder="0" allowfullscreen></iframe></div>';
     }
 
     private function parseYouTubeVideoID($url) {

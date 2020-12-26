@@ -701,24 +701,22 @@ class cmsController {
      * @param array $params Параметры события
      * @return mixed
      */
-    public function runExternalHook($event_name, $params = []) {
+    public function runExternalHook($event_name, $params = array()){
 
         $class_name = 'on' . string_to_camel('_', $this->name) . string_to_camel('_', $event_name);
 
-        if (!class_exists($class_name, false)) {
+        if (!class_exists($class_name, false)){
 
             $hook_file = $this->root_path . 'hooks/' . $event_name . '.php';
 
-            if (!is_readable($hook_file)) {
-                cmsCore::error(ERR_FILE_NOT_FOUND . ': ' . str_replace(PATH, '', $hook_file));
-            }
-
             include_once $hook_file;
+
         }
 
         $hook_object = new $class_name($this);
 
-        return call_user_func_array([$hook_object, 'run'], $params);
+        return call_user_func_array(array($hook_object, 'run'), $params);
+
     }
 
 //============================================================================//
@@ -1327,7 +1325,7 @@ class cmsController {
 
     public function validate_sysname($value){
         if (empty($value)) { return true; }
-        if (!is_string($value) || !preg_match("/^([a-z0-9\_]*[a-z]+[a-z0-9\_]*)$/", $value)){ return ERR_VALIDATE_SYSNAME; }
+        if (!is_string($value) || !preg_match("/^([a-z0-9\_]*)$/", $value)){ return ERR_VALIDATE_SYSNAME; }
         return true;
     }
 

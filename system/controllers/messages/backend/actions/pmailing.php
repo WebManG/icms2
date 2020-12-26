@@ -28,10 +28,10 @@ class actionMessagesPmailing extends cmsAction {
             if (!$errors) {
 
                 $sender = !empty($user['id']) ? $user : $this->cms_user;
-                $sender_id = is_object($sender) ? $sender->id : $sender['id'];
-                $sender_nickname = is_object($sender) ? $sender->nickname : $sender['nickname'];
+                $sender_id = $sender['id'];
+                $sender_nickname = $sender['nickname'];
 
-                if ($mailing['groups']) {
+                if ($mailing['groups'] && $mailing['groups'] != array(0)) {
                     $this->model_users->filterGroups($mailing['groups']);
                 }
 

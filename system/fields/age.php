@@ -85,6 +85,8 @@ class fieldAge extends cmsFormField {
 
         if(is_array($value)){
 
+            $range = constant('LANG_' . $this->getOption('range').'10');
+
             $result_string = '';
 
             if (!empty($value['from'])){

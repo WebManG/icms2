@@ -244,8 +244,8 @@ icms.messages = (function ($) {
             scrollTop: $('#pm_chat')[0].scrollHeight
         }, 500);
         if(self.is_modal){
-            $('#icms_modal').stop().animate({
-                scrollTop: $('#icms_modal')[0].scrollHeight
+            $('.modal-body').stop().animate({
+                scrollTop: $('.modal-body')[0].scrollHeight
             }, 500);
         }
     };

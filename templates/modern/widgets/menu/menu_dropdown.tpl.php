@@ -10,7 +10,7 @@
             $widget->options['menu'],
             $widget->options['is_detect'],
             (!empty($widget->options['class']) ? $widget->options['class'] : 'dropdown-menu dropdown-menu-right'),
-            $widget->options['max_items'], empty($widget->options['is_detect_strict']),
+            $widget->options['max_items'], true,
             (!empty($widget->options['template']) ? $widget->options['template'] : 'menu'),
             $widget->title
         );

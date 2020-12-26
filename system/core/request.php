@@ -15,17 +15,10 @@ class cmsRequest {
     const CTX_AJAX        = 3;
 
     /**
-     * Константы типа контекста запроса
-     * @var integer
-     */
-    const CTX_TYPE_STANDARD = 0;
-    const CTX_TYPE_MODAL    = 1;
-
-    /**
      * Массив данных запроса
      * @var array
      */
-    private $data = [];
+    private $data = array();
 
     /**
      * Текущий контекст запроса
@@ -44,7 +37,7 @@ class cmsRequest {
      * Возможные типы устройств
      * @var array
      */
-    public static $device_types = ['desktop', 'mobile', 'tablet'];
+    public static $device_types = array('desktop', 'mobile', 'tablet');
 
     /**
      * Создает объект запроса
@@ -60,6 +53,7 @@ class cmsRequest {
         } else {
             $this->context = $context;
         }
+
     }
 
 //============================================================================//
@@ -117,26 +111,6 @@ class cmsRequest {
      */
     public function isAjax(){
         return ($this->context == cmsRequest::CTX_AJAX);
-    }
-
-    /**
-     * Возвращает тип контекста запроса
-     * @return integer
-     */
-    public function getType(){
-        if(isset($_SERVER['HTTP_ICMS_REQUEST_TYPE']) && is_numeric($_SERVER['HTTP_ICMS_REQUEST_TYPE'])) {
-            return $_SERVER['HTTP_ICMS_REQUEST_TYPE'];
-        } else {
-            return self::CTX_TYPE_STANDARD;
-        }
-    }
-
-    /**
-     * Возвращает true, если тип контекста запроса для модального окна
-     * @return boolean
-     */
-    public function isTypeModal(){
-        return $this->getType() == self::CTX_TYPE_MODAL;
     }
 
 //============================================================================//
